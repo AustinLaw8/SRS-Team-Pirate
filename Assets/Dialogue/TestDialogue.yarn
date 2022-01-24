@@ -1,0 +1,12 @@
+﻿title: TestDialogue
+tags:
+---
+This is a test dialogue yarn script. Here are some options:
+
+-> Player: Option 1, which will respond with "You chose option one."
+    You chose option one.
+-> Player: Option 2, which will respond with "You chose option two."
+    You chose option two.
+
+End test.
+===
