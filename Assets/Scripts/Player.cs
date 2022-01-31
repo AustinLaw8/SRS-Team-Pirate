@@ -9,7 +9,8 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float speed=3f;
+    [SerializeField] public List<Ability> abilities = new List<Ability>{};
     [SerializeField] private float jumpForce = 3f;
 
     private Rigidbody2D rb;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        abilities.Add(new Test(0,3,this));
         foreach (BoxCollider2D bx in this.GetComponents<BoxCollider2D>())
             if (bx.isTrigger)
                 groundedBox = bx;
@@ -66,9 +68,28 @@ public class Player : MonoBehaviour
         }
     }
 
+    
     public void FixedUpdate()
     {
         rb.velocity = new Vector2(x_vel, rb.velocity.y);
+        for(int i = 0; i < abilities.Count; i++){
+            abilities[i].currentCooldown -= Time.deltaTime;
+            if(abilities[i].currentCooldown < 0){
+                abilities[i].currentCooldown = 0;
+            }
+        }
     }
 
+    public void OnUseAbility(InputValue input){
+        abilities[0].action();
+    }
+
+    public void putOnCooldown(Ability ability){
+        if(!abilities.Contains(ability)){
+            return;
+        }
+        else {
+            ability.currentCooldown = ability.getCooldown();
+        }
+    }
 }
