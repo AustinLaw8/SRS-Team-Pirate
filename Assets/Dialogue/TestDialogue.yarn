@@ -1,7 +1,8 @@
-﻿title: TestDialogue
+﻿title: Start
 tags:
 ---
-This is a test dialogue yarn script. Here are some options:
+TEST: This is a test dialogue yarn script. 
+TEST: This is a really long line where someone says something, idk really long line long long long long long long long long long long long long long long long long long long long long line
 
 -> Player: Option 1, which will respond with "You chose option one."
     You chose option one.
