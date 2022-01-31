@@ -9,19 +9,28 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private float speed=3f;
-    
+    [SerializeField] private float speed = 3f;
+    [SerializeField] private float jumpForce = 3f;
+
     private Rigidbody2D rb;
     private float x_vel;
+
+    // Variables for checking if Player is grounded
+    private bool grounded;
+    private BoxCollider2D groundedBox;
+    [SerializeField] private LayerMask groundMask;
 
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        foreach (BoxCollider2D bx in this.GetComponents<BoxCollider2D>())
+            if (bx.isTrigger)
+                groundedBox = bx;
+        x_vel = 0;
     }
 
     void Start()
     {
-        x_vel = 0;
     }
 
     public void OnMove(InputValue input)
@@ -38,16 +47,23 @@ public class Player : MonoBehaviour
             // Character should face the left
         }
 
-        /**
-         * float yInput = input.Get<Vector2>().y;
-         * if (yInput > 0) { 
-         *  jump()
-         * } elif (yInput < 0) {
-         *    crouch() or dropdownplatform()
-         * } else {
-         *      do something? or do nothing. 
-         * }
-         **/
+
+        float yInput = input.Get<Vector2>().y;
+        if (yInput > 0)
+        {
+            if (groundedBox.IsTouchingLayers(groundMask.value))
+            {
+                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            }
+        }
+        else if (yInput < 0)
+        {
+            // crouch() or dropdownplatform()
+        }
+        else
+        {
+            // do something? probably not
+        }
     }
 
     public void FixedUpdate()
