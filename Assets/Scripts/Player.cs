@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField] private float speed=3f;
+    [SerializeField] private List<Ability> abilities;
+    [SerializeField] public AbilityManager abilityManager;
     
     private Rigidbody2D rb;
     private float x_vel;
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        abilities.Add(new Test(0,3,this));
     }
 
     void Start()
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
          **/
     }
 
+    
     public void FixedUpdate()
     {
         rb.velocity = new Vector2(x_vel, rb.velocity.y);
