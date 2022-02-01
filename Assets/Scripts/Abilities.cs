@@ -9,22 +9,13 @@ public abstract class Ability
     [SerializeField] public Player player;
     public float currentCooldown = 0;
 
-    public Ability(int _id, float _Cooldown, Player _player)
+    public Ability(Player _player)
     {
-        this.id = _id;
-        this.Cooldown = _Cooldown;
         this.player = _player;
     }
     public bool onCooldown()
     {
-        if (currentCooldown <= 0)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return currentCooldown > 0;
     }
 
     public void putOnCD()
@@ -44,13 +35,13 @@ public abstract class Ability
 
 }
 
-class Test : Ability
+class Test1 : Ability
 {
 
-    public Test(int _id, float _Cooldown, Player _player) : base(_id, _Cooldown, _player)
+    public Test1(Player _player) : base(_player)
     {
-        id = _id;
-        Cooldown = _Cooldown;
+        id = 0;
+        Cooldown = 3;
         player = _player;
     }
     public override void action()
@@ -58,7 +49,70 @@ class Test : Ability
         if (onCooldown()) { Debug.Log("CD");}
         else
         {
-            Debug.Log("we testing");
+            Debug.Log("Ability 1");
+            putOnCD();
+        }
+
+    }
+}
+
+class Test2 : Ability
+{
+
+    public Test2(Player _player) : base(_player)
+    {
+        id = 1;
+        Cooldown = 5;
+        player = _player;
+    }
+    public override void action()
+    {
+        if (onCooldown()) { Debug.Log("CD");}
+        else
+        {
+            Debug.Log("Ability 2");
+            putOnCD();
+        }
+
+    }
+}
+
+class Test3 : Ability
+{
+
+    public Test3(Player _player) : base(_player)
+    {
+        id = 2;
+        Cooldown = 1;
+        player = _player;
+    }
+    public override void action()
+    {
+        if (onCooldown()) { Debug.Log("CD");}
+        else
+        {
+            Debug.Log("Ability 3");
+            putOnCD();
+        }
+
+    }
+}
+
+class Test4 : Ability
+{
+
+    public Test4(Player _player) : base(_player)
+    {
+        id = 3;
+        Cooldown = 20;
+        player = _player;
+    }
+    public override void action()
+    {
+        if (onCooldown()) { Debug.Log("CD");}
+        else
+        {
+            Debug.Log("Ability 4");
             putOnCD();
         }
 

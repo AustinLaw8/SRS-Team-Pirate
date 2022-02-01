@@ -24,7 +24,10 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        abilities.Add(new Test(0,3,this));
+        abilities.Add(new Test1(this));
+        abilities.Add(new Test2(this));
+        abilities.Add(new Test3(this));
+        abilities.Add(new Test4(this));
         foreach (BoxCollider2D bx in this.GetComponents<BoxCollider2D>())
             if (bx.isTrigger)
                 groundedBox = bx;
@@ -80,8 +83,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnUseAbility(InputValue input){
+    public void OnUseAbility1(InputValue input){
         abilities[0].action();
+    }
+
+    public void OnUseAbility2(InputValue input){
+        abilities[1].action();
+    }
+
+    public void OnUseAbility3(InputValue input){
+        abilities[2].action();
+    }
+
+    public void OnUseAbility4(InputValue input){
+        abilities[3].action();
     }
 
     public void putOnCooldown(Ability ability){
