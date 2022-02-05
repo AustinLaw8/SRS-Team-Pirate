@@ -12,13 +12,13 @@ public class KillingTask : Task
 
     public override void initialize(){
         base.initialize();
-        // EventManager.Instance.AddListener<KillEvent>(OnKill);
+        EventManager.Instance.AddListener<KillEvent>(OnKill);
     }
 
-    private void OnKill(){
-        // if(event.name == mobName){
-        //     curAmount++;
-        //     Evaluate();
-        // }
+    private void OnKill(KillEvent evnt){
+        if(evnt.mobName == mobName){
+            curAmount++;
+            checkTasks();
+        }
     }
 }
