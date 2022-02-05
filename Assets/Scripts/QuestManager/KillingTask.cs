@@ -12,7 +12,7 @@ public class KillingTask : Task
 
     public override void initialize(){
         base.initialize();
-        // QuestManager.Instance.AddListener<KillEvent>(OnKill);
+        // EventManager.Instance.AddListener<KillEvent>(OnKill);
     }
 
     private void OnKill(){
