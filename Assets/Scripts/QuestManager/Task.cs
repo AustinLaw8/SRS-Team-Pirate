@@ -5,38 +5,34 @@ using UnityEngine.Events;
 
 public abstract class Task : ScriptableObject
 {
-    // Start is called before the first frame update
     public string taskDescription;
-    public int reqAmount;
     public bool completed{get; protected set;}
-    public int curAmount;
-    public TaskCompletionEvent completionEvent;
 
-    public void initialize() {
+    public int reqAmount;
+    public int curAmount;
+    [HideInInspector] public TaskCompletionEvent completionEvent;
+
+    public virtual void initialize() {
         completed = false;
         curAmount = 0;
         completionEvent = new TaskCompletionEvent();
     }
 
-    public bool checkTasks() {
+    public void checkTasks() {
         if (curAmount >= reqAmount) {
             complete();
-            return true;
         }
-        else return false;
     }
 
-    void complete() {
+    public void complete() {
         completed = true;
         completionEvent.Invoke(this);
+        completionEvent.RemoveAllListeners();
     }
 
-    public string getDescription() {
+    public virtual string getDescription() {
         return taskDescription;
     }
-
-    
-
     
 }
 
