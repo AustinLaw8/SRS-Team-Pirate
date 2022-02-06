@@ -20,7 +20,7 @@ public class QuestManager : MonoBehaviour
          quest.completionEvent.AddListener(onQuestCompleted);
          
          GameObject questObj = Instantiate(questPrefab, questsContent);
-         questObj.transform.Find("icon").GetComponent<Image>().sprite = quest.information.icon;
+         questObj.transform.Find("Icon").GetComponent<Image>().sprite = quest.information.icon;
          
          questObj.GetComponent<Button>().onClick.AddListener(delegate
          {

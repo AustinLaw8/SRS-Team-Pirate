@@ -118,7 +118,7 @@ public class QuestEditor : Editor
             child.NextVisible(false);
         }
         
-        int choice = EditorGUILayout.Popup("Add new Quest Goal", -1, questTaskTypes.ToArray());
+        int choice = EditorGUILayout.Popup("Add new Task", -1, questTaskTypes.ToArray());
 
         if (choice != -1)
         {
