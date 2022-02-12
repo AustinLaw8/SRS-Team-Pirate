@@ -15,3 +15,4 @@ public class KillEvent : GameEvent
         mobName = name;
     }
 }
+
