@@ -17,18 +17,28 @@ public class Bullet : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    // Collision or trigger?
+    private void OnTriggerEnter2D(Collider2D enemyTarget)
     {
-        if (collision.gameObject.tag == "Enemy") {
-            Destroy(collision.gameObject);
-            Debug.Log("hit!");
+        if (enemyTarget.gameObject.tag == "Enemy") {
+            // Trigger enemy vulnerable to being basic attacked
+            Debug.Log("Aimed at enemy");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D enemyTarget)
+    {
+        if (enemyTarget.gameObject.tag == "Enemy") {
+            // Trigger enemy not able to be basic attacked
+            Debug.Log("Deselected from enemy");
         }
     }
 
     void Update()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        transform.position = Vector2.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
+        transform.position = mousePosition;
     }
 
     /*
