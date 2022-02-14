@@ -44,7 +44,8 @@ public class Player : MonoBehaviour
         }
 
         interactableFilter = new ContactFilter2D();
-        interactableFilter.layerMask = interactableMask;
+        interactableFilter.SetLayerMask(interactableMask);
+        interactableFilter.useTriggers = true;
         x_vel = 0;
     }
 
@@ -90,7 +91,7 @@ public class Player : MonoBehaviour
         List<Collider2D> results = new List<Collider2D>();
         ContactFilter2D temp = new ContactFilter2D();
         temp.layerMask = groundMask;
-        interactBox.OverlapCollider(temp.NoFilter(), results);
+        interactBox.OverlapCollider(interactableFilter, results);
         foreach (var e in results)
         {
             Debug.Log(e.transform.name);
