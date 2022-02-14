@@ -137,8 +137,8 @@ GameObject:
   - component: {fileID: 60783914}
   - component: {fileID: 60783913}
   - component: {fileID: 60783915}
-  m_Layer: 0
-  m_Name: Bullet
+  m_Layer: 2
+  m_Name: TargetReticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -306,11 +306,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6210694215856544330, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2126503
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6210694215856544330, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13291477
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6210694215856544330, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -350,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6210694215856544342, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5249fb433e00488289a799d14828b2a, type: 3}
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 1415672255}
   - component: {fileID: 1415672254}
   - component: {fileID: 1415672253}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyExample
   m_TagString: Enemy
   m_Icon: {fileID: 0}

@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 // Class name needs to be updated to something like
 // TargetReticle, AimCursor, etc.
-public class Bullet : MonoBehaviour
+public class TargetReticle : MonoBehaviour
 {
 
     private Rigidbody2D rb;
@@ -31,7 +31,10 @@ public class Bullet : MonoBehaviour
 
             // Player and enemyTarget.attachedRigidbody need to be 2D, which SHOULD happen
             Vector2 playerToEnemy = enemyTarget.attachedRigidbody.transform.position - player.transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(player.transform.position, playerToEnemy);
+            // Use enemy mask, maybe can control range of attack with Raycast(pos1,pos2,RANGE,mask) ?
+            LayerMask enemyMask = LayerMask.GetMask("Enemy");
+            //int enemyMask = 1 << 9;
+            RaycastHit2D hit = Physics2D.Raycast(player.transform.position, playerToEnemy, 100, enemyMask);
 
             //If something was hit.
             if (hit.collider != null)
