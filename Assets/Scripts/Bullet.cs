@@ -5,27 +5,49 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))] 
 
+// Class name needs to be updated to something like
+// TargetReticle, AimCursor, etc.
 public class Bullet : MonoBehaviour
 {
 
     private Rigidbody2D rb;
 
-    public float moveSpeed = 10;
+    // Use to get player transform
+    // Use inspector to add player
+    [SerializeField] private GameObject player;
 
     void Awake()
     {
-
+        // Use inspector to add player? 
+        // But can hardcode here if applicable
     }
 
     // Collision or trigger?
-    private void OnTriggerEnter2D(Collider2D enemyTarget)
+    private void OnTriggerStay2D(Collider2D enemyTarget)
     {
         if (enemyTarget.gameObject.tag == "Enemy") {
             // Trigger enemy vulnerable to being basic attacked
             Debug.Log("Aimed at enemy");
+
+            // Player and enemyTarget.attachedRigidbody need to be 2D, which SHOULD happen
+            Vector2 playerToEnemy = enemyTarget.attachedRigidbody.transform.position - player.transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(player.transform.position, playerToEnemy);
+
+            //If something was hit.
+            if (hit.collider != null)
+            {
+                //If the object hit is less than or equal to 6 units away from this object.
+                if (hit.distance <= 6.0f)
+                {
+                    Debug.Log("Enemy in range, dist:" + hit.distance + " point:" + hit.point);
+                } else {
+                    Debug.Log("Enemy outside 6.0f, dist:" + hit.distance);
+                }
+            }
         }
     }
 
+    // Using OnTriggerStay instead of OnTriggerEnter makes this method unnecessary
     private void OnTriggerExit2D(Collider2D enemyTarget)
     {
         if (enemyTarget.gameObject.tag == "Enemy") {
@@ -40,30 +62,5 @@ public class Bullet : MonoBehaviour
         //transform.position = Vector2.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
         transform.position = mousePosition;
     }
-
-    /*
-
-    // Adjust the speed for the application.
-    public float speed = 1.0f;
-
-    // The target position.
-    private Vector3 target;
-
-    void Update()
-    {
-        // Grab mouse values and place on the target.
-        target = Mouse.current.position.ReadValue();
-
-        // Move our position a step closer to the target.
-        float step =  speed * Time.deltaTime; // calculate distance to move
-        transform.position = Vector3.MoveTowards(transform.position, target, step);
-
-        // Check if the position of the cube and sphere are approximately equal.
-        if (Vector3.Distance(transform.position, target) < 0.001f)
-        {
-            
-        }
-    }
-    */
 
 }
