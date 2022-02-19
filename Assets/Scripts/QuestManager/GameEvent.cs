@@ -16,3 +16,17 @@ public class KillEvent : GameEvent
     }
 }
 
+public class TalkToNpcEvent : GameEvent
+{
+    public string npcName; 
+    public TalkToNpcEvent(string nm) 
+    {
+        npcName = nm;
+    }
+
+    public bool checkNpcCondition()
+    {
+        //check some sort of npc condition other than name
+        return true;
+    }
+}

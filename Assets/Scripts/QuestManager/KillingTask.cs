@@ -7,7 +7,7 @@ using System;
 
 public class KillingTask : Task
 {
-    public static event Action onUpdateKillCount;
+   
     public string mobName;
 
     public override string getDescription(){
@@ -20,9 +20,8 @@ public class KillingTask : Task
     }
 
     private void OnKill(KillEvent evnt){
-        if(evnt.mobName == mobName){
+        if(evnt.mobName == mobName){ 
             curAmount++;
-            onUpdateKillCount?.Invoke();
             checkTasks();
         }
     }
