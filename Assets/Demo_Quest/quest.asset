@@ -13,10 +13,27 @@ MonoBehaviour:
   m_Name: quest
   m_EditorClassIdentifier: 
   information:
-    name: 
-    description: 
+    name: Arrival
+    description: Talk to two characters
     icon: {fileID: 0}
   reward:
-    xp: 0
-    gold: 0
-  tasks: []
+    xp: 5
+    gold: 5
+  tasks:
+  - {fileID: 4156302843647212248}
+--- !u!114 &4156302843647212248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbc9cf8f5e454939add48abc44a4e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskDescription: Talk to two characters
+  reqAmount: 2
+  curAmount: 0
+  NpcName: 
