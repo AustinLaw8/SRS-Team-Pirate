@@ -5,10 +5,10 @@ using UnityEngine;
 public class TalkToNpcTask: Task
 {
     
-    public string NpcName; //or NPC name
+    public string npcName; //or NPC name
     public override string getDescription()
     {
-        return $"Talk to {NpcName}";
+        return $"Talk to {npcName}";
     } 
 
     public override void initialize(){
@@ -17,7 +17,7 @@ public class TalkToNpcTask: Task
     }
 
     private void OnTalk(TalkToNpcEvent evnt){
-        if(true){ //replace with namecheck or other methods to check npc
+        if(evnt.npcName == npcName){ //replace with namecheck or other methods to check npc
             curAmount++;
             checkTasks();
         }
