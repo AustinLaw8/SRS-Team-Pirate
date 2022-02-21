@@ -31,7 +31,7 @@ public class QuestManager : MonoBehaviour
    }
 
    public void kill(string mobName){
-       EventManager.Instance.QueueEvent(new KillEvent(mobName));
+      EventManager.Instance.QueueEvent(new KillEvent(mobName));
    }
 
    private void onQuestCompleted(Quest quest)

@@ -9,16 +9,19 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private float speed=3f;
-    [SerializeField] public List<Ability> abilities = new List<Ability>{};
+    [SerializeField] private float speed = 3f;
+    [SerializeField] public List<Ability> abilities = new List<Ability> { };
     [SerializeField] private float jumpForce = 3f;
 
     private Rigidbody2D rb;
     private float x_vel;
-
+    private Vector2 facing;
+    [SerializeField] private LayerMask interactableMask;
+    private ContactFilter2D interactableFilter;
     // Variables for checking if Player is grounded
     private bool grounded;
     private BoxCollider2D groundedBox;
+    private BoxCollider2D interactBox;
     [SerializeField] private LayerMask groundMask;
 
     void Awake()
@@ -29,8 +32,20 @@ public class Player : MonoBehaviour
         abilities.Add(new Test3(this));
         abilities.Add(new Test4(this));
         foreach (BoxCollider2D bx in this.GetComponents<BoxCollider2D>())
+        {
             if (bx.isTrigger)
+            {
                 groundedBox = bx;
+            }
+            else
+            {
+                interactBox = bx;
+            }
+        }
+
+        interactableFilter = new ContactFilter2D();
+        interactableFilter.SetLayerMask(interactableMask);
+        interactableFilter.useTriggers = true;
         x_vel = 0;
     }
 
@@ -45,11 +60,11 @@ public class Player : MonoBehaviour
         // Handles direction character is facing
         if (x_vel > 0)
         {
-            // Character should face to the right
+            facing = Vector2.right;
         }
         else if (x_vel < 0)
         {
-            // Character should face the left
+            facing = Vector2.left;
         }
 
 
@@ -71,39 +86,48 @@ public class Player : MonoBehaviour
         }
     }
 
-    
+    public void OnInteract(InputValue input)
+    {
+        List<Collider2D> results = new List<Collider2D>();
+        ContactFilter2D temp = new ContactFilter2D();
+        temp.layerMask = groundMask;
+        interactBox.OverlapCollider(interactableFilter, results);
+        foreach (var e in results)
+        {
+            Debug.Log(e.transform.name);
+            e.transform.gameObject.GetComponent<Interactable>().interactAction.Invoke();
+        }
+    }
+
     public void FixedUpdate()
     {
         rb.velocity = new Vector2(x_vel, rb.velocity.y);
-        for(int i = 0; i < abilities.Count; i++){
-            abilities[i].currentCooldown -= Time.deltaTime;
-            if(abilities[i].currentCooldown < 0){
-                abilities[i].currentCooldown = 0;
+        foreach (var ability in abilities)
+        {
+            ability.currentCooldown -= Time.deltaTime;
+            if (ability.currentCooldown < 0)
+            {
+                ability.currentCooldown = 0;
             }
         }
     }
 
-    public void OnUseAbility1(InputValue input){
-        abilities[0].action();
-    }
+    public void OnUseAbility1(InputValue input) { abilities[0].action(); }
 
-    public void OnUseAbility2(InputValue input){
-        abilities[1].action();
-    }
+    public void OnUseAbility2(InputValue input) { abilities[1].action(); }
 
-    public void OnUseAbility3(InputValue input){
-        abilities[2].action();
-    }
+    public void OnUseAbility3(InputValue input) { abilities[2].action(); }
 
-    public void OnUseAbility4(InputValue input){
-        abilities[3].action();
-    }
+    public void OnUseAbility4(InputValue input) { abilities[3].action(); }
 
-    public void putOnCooldown(Ability ability){
-        if(!abilities.Contains(ability)){
+    public void putOnCooldown(Ability ability)
+    {
+        if (!abilities.Contains(ability))
+        {
             return;
         }
-        else {
+        else
+        {
             ability.currentCooldown = ability.getCooldown();
         }
     }
