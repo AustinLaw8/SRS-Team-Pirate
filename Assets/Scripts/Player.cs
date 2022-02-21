@@ -95,6 +95,7 @@ public class Player : MonoBehaviour
         foreach (var e in results)
         {
             Debug.Log(e.transform.name);
+            e.transform.gameObject.GetComponent<Interactable>().interactAction.Invoke();
         }
     }
 
