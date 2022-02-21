@@ -9,9 +9,6 @@ public class NPC : MonoBehaviour
 
     public void Talk(){
         // Do talking stuff
-
-        Debug.Log($"Talking to {npcName}");
-        
         if(!isPartOfQuest) return;
         EventManager.Instance.QueueEvent(new TalkToNpcEvent(npcName));
     }
