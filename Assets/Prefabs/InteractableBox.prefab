@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1167086015918911560}
   - component: {fileID: 1167086015918911563}
   - component: {fileID: 2455236488885965703}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InteractableBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inRange: 0
-  interactKey: 102
   interactAction:
     m_PersistentCalls:
       m_Calls: []
