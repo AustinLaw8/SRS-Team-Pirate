@@ -17,7 +17,6 @@ public class QuestWindow : MonoBehaviour
     {
         titleText.text = quest.information.name;
         descriptionText.text = quest.information.description;
-        //KillingTask.onUpdateKillCount += updateCount;
 
         foreach (var task in quest.tasks)
         {
@@ -39,16 +38,7 @@ public class QuestWindow : MonoBehaviour
         gold.text = quest.reward.gold.ToString();
     }
 
-/*
-    public void updateCount() {
 
-        foreach (var task in quest.tasks) {
-            if (!task.completed) {
-               countObj.GetComponent<Text>().text = task.curAmount + "/" + task.reqAmount; 
-            }
-        }
-    }
-*/
 
     public void closeWindow()
     {
@@ -58,6 +48,5 @@ public class QuestWindow : MonoBehaviour
         {
             Destroy(taskContent.GetChild(i).gameObject);
         }
-       //KillingTask.onUpdateKillCount -= upDateCount; 
     }
 }
