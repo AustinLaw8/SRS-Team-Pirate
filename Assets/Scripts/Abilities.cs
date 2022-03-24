@@ -118,3 +118,31 @@ class Test4 : Ability
 
     }
 }
+
+class BasicAttack : Ability {
+
+    private TargetReticle basAtkRet;
+
+    public BasicAttack(Player _player, TargetReticle _basAtkRet) : base(_player)
+    {
+        basAtkRet = _basAtkRet;
+        id = 4;
+        Cooldown = 0.1f; // Needs attack speed
+        player = _player;
+    }
+
+    public override void action()
+    {
+        if (onCooldown()) { Debug.Log("CD: BasicAttack");}
+        else
+        {
+            Debug.Log("BasicAttack");
+            if (basAtkRet != null && basAtkRet.getEnemyToHit() != null) {
+                basAtkRet.getEnemyToHit().applyDamage(1);
+            }
+
+            putOnCD();
+        }
+    }
+
+}
