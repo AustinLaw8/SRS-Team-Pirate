@@ -136,9 +136,9 @@ class BasicAttack : Ability {
         if (onCooldown()) { Debug.Log("CD: BasicAttack");}
         else
         {
-            Debug.Log("BasicAttack");
+            //Debug.Log("BasicAttack");
             if (basAtkRet != null && basAtkRet.getEnemyToHit() != null) {
-                basAtkRet.getEnemyToHit().applyDamage(1);
+                basAtkRet.getEnemyToHit().applyDamage(1); // Changeable damage?
             }
 
             putOnCD();
