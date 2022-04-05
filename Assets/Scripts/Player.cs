@@ -8,11 +8,12 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-
+    [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private Camera mainCamera;
+    private Vector3 dialogueBoxDisplacement = new Vector3(0, 100, 0);
     [SerializeField] private float speed = 3f;
     [SerializeField] public List<Ability> abilities = new List<Ability> { };
     [SerializeField] private float jumpForce = 3f;
-
     private Rigidbody2D rb;
     private float x_vel;
     private Vector2 facing;
@@ -51,6 +52,12 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        if (dialogueBox == null) {
+            dialogueBox = GameObject.Find("Line View");
+        }
+        if (mainCamera == null) {
+            mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        }
     }
 
     public void OnMove(InputValue input)
@@ -110,6 +117,8 @@ public class Player : MonoBehaviour
                 ability.currentCooldown = 0;
             }
         }
+        Vector3 targetLoc = mainCamera.WorldToScreenPoint(this.transform.position);
+        dialogueBox.transform.position = targetLoc + dialogueBoxDisplacement;
     }
 
     public void OnUseAbility1(InputValue input) { abilities[0].action(); }
