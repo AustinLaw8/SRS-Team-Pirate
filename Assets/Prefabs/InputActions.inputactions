@@ -78,9 +78,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "NextLine",
+                    "name": "UseBasicAttack",
                     "type": "Button",
-                    "id": "8aa60e16-e177-4e90-8aa9-08e212f0dc9f",
+                    "id": "9d1d1878-82a7-4d29-8228-50532c2b5793",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -365,12 +365,56 @@
                 },
                 {
                     "name": "",
-                    "id": "e8d18e2b-63c4-46cd-b3e9-bdb22f73eee7",
-                    "path": "<Keyboard>/space",
+                    "id": "a246df44-88e8-49b7-9ba7-7de0ea3fdb36",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "NextLine",
+                    "groups": ";Gamepad",
+                    "action": "UseBasicAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc9cb156-5215-4400-90d7-788b40d449e0",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "UseBasicAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ad1e3fe-3234-486c-98ae-19845f512f5a",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "UseBasicAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fee118c-9244-4618-9f4a-7b6c5827de9d",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "UseBasicAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6b54d82-a793-482d-8588-dd57904048e3",
+                    "path": "<XRController>/{PrimaryAction}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "UseBasicAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -25,13 +25,21 @@ public class Player : MonoBehaviour
     private BoxCollider2D interactBox;
     [SerializeField] private LayerMask groundMask;
 
+    [SerializeField] private TargetReticle basAtkRet;
+
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        basAtkRet = null;
+        Transform targetRet = this.gameObject.transform.Find("TargetReticle");
+        if (targetRet != null) {
+            basAtkRet = this.gameObject.transform.Find("TargetReticle").GetComponent<TargetReticle>(); // Hardcoded name but shouldn't be an issue
+        }
         abilities.Add(new Test1(this));
         abilities.Add(new Test2(this));
         abilities.Add(new Test3(this));
         abilities.Add(new Test4(this));
+        abilities.Add(new BasicAttack(this, basAtkRet)); // Treat basic attack like any other ability
         foreach (BoxCollider2D bx in this.GetComponents<BoxCollider2D>())
         {
             if (bx.isTrigger)
@@ -128,6 +136,8 @@ public class Player : MonoBehaviour
     public void OnUseAbility3(InputValue input) { abilities[2].action(); }
 
     public void OnUseAbility4(InputValue input) { abilities[3].action(); }
+
+    public void OnUseBasicAttack(InputValue input) { abilities[4].action(); }
 
     public void putOnCooldown(Ability ability)
     {
