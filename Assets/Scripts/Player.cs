@@ -8,31 +8,41 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameObject dialogueBox;
+    private static float LEFT_CAMERA_LIMIT = -100f;
+    private static float RIGHT_CAMERA_LIMIT = 100f;
+    private static float LEFT_WORLD_LIMIT = -35f;
+    private static float RIGHT_WORLD_LIMIT = 35f;
+    private static Vector3 dialogueBoxDisplacement = new Vector3(0, 100, 0);
+
     [SerializeField] private Camera mainCamera;
-    private Vector3 dialogueBoxDisplacement = new Vector3(0, 100, 0);
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private Transform backgroundParent;
     [SerializeField] public List<Ability> abilities = new List<Ability> { };
+    [SerializeField] private TargetReticle basAtkRet;
+    [SerializeField] private float speed = 3f;
     [SerializeField] private float jumpForce = 3f;
     private Rigidbody2D rb;
     private float x_vel;
     private Vector2 facing;
+
+    // For dealing with world interaction
     [SerializeField] private LayerMask interactableMask;
     private ContactFilter2D interactableFilter;
-    // Variables for checking if Player is grounded
+    
+    // For checking if Player is grounded
     private bool grounded;
     private BoxCollider2D groundedBox;
     private BoxCollider2D interactBox;
     [SerializeField] private LayerMask groundMask;
 
-    [SerializeField] private TargetReticle basAtkRet;
 
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
         basAtkRet = null;
         Transform targetRet = this.gameObject.transform.Find("TargetReticle");
-        if (targetRet != null) {
+        if (targetRet != null)
+        {
             basAtkRet = this.gameObject.transform.Find("TargetReticle").GetComponent<TargetReticle>(); // Hardcoded name but shouldn't be an issue
         }
         abilities.Add(new Test1(this));
@@ -60,11 +70,17 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        if (dialogueBox == null) {
+        if (dialogueBox == null)
+        {
             dialogueBox = GameObject.Find("Line View");
         }
-        if (mainCamera == null) {
+        if (mainCamera == null)
+        {
             mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        }
+        if (backgroundParent == null)
+        {
+            backgroundParent = GameObject.Find("WorldBackground").transform;
         }
     }
 
@@ -125,6 +141,8 @@ public class Player : MonoBehaviour
                 ability.currentCooldown = 0;
             }
         }
+
+        setCamera();
         Vector3 targetLoc = mainCamera.WorldToScreenPoint(this.transform.position);
         dialogueBox.transform.position = targetLoc + dialogueBoxDisplacement;
     }
@@ -148,6 +166,37 @@ public class Player : MonoBehaviour
         else
         {
             ability.currentCooldown = ability.getCooldown();
+        }
+    }
+
+    /* Assorted Helpers for Clarity */
+
+    // Sets camera position
+    // and calculates parallax
+    private void setCamera()
+    {
+        float arbitraryMax = 10f;
+        mainCamera.transform.position = new Vector3(getCameraXPos(), 0, mainCamera.transform.position.z);
+        for(int i = 0; i < backgroundParent.childCount - 1; i++) {
+            float targetX = this.transform.position.x / RIGHT_WORLD_LIMIT * arbitraryMax * i / backgroundParent.childCount;
+            backgroundParent.GetChild(i).position = new Vector3(targetX, 0, 0);
+        }
+    }
+
+    // Clamps X position of the camera
+    private float getCameraXPos()
+    {
+        if (this.transform.position.x < LEFT_CAMERA_LIMIT)
+        {
+            return LEFT_CAMERA_LIMIT;
+        }
+        else if (this.transform.position.x > RIGHT_CAMERA_LIMIT)
+        {
+            return RIGHT_CAMERA_LIMIT;
+        }
+        else
+        {
+            return this.transform.position.x;
         }
     }
 }

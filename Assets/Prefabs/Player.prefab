@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6210694215856544331}
   - component: {fileID: 538684245}
   - component: {fileID: 6210694215856544332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab332dfd1f939489ea26f9c45fe3ba40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueBox: {fileID: 0}
+  mainCamera: {fileID: 0}
   speed: 3
   jumpForce: 3
   interactableMask:
@@ -128,6 +130,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  basAtkRet: {fileID: 0}
 --- !u!61 &6210694215856544331
 BoxCollider2D:
   m_ObjectHideFlags: 0
