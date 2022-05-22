@@ -8,12 +8,12 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    private static float LEFT_CAMERA_LIMIT = -100f;
-    private static float RIGHT_CAMERA_LIMIT = 100f;
-    private static float LEFT_WORLD_LIMIT = -35f;
-    private static float RIGHT_WORLD_LIMIT = 35f;
+    private static float LEFT_CAMERA_LIMIT = -35f;
+    private static float RIGHT_CAMERA_LIMIT = 35f;
+    private static float PARALLAX_FACTOR = 5f;
     private static Vector3 dialogueBoxDisplacement = new Vector3(0, 100, 0);
 
+    // Outside GameObjects and fields we want access to
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private Transform backgroundParent;
@@ -28,13 +28,15 @@ public class Player : MonoBehaviour
     // For dealing with world interaction
     [SerializeField] private LayerMask interactableMask;
     private ContactFilter2D interactableFilter;
-    
+
     // For checking if Player is grounded
     private bool grounded;
     private BoxCollider2D groundedBox;
     private BoxCollider2D interactBox;
     [SerializeField] private LayerMask groundMask;
 
+    // Sprite 
+    private SpriteRenderer sp;
 
     void Awake()
     {
@@ -66,6 +68,8 @@ public class Player : MonoBehaviour
         interactableFilter.SetLayerMask(interactableMask);
         interactableFilter.useTriggers = true;
         x_vel = 0;
+
+        sp = GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -142,6 +146,8 @@ public class Player : MonoBehaviour
             }
         }
 
+        sp.flipX = facing == Vector2.right;
+
         setCamera();
         Vector3 targetLoc = mainCamera.WorldToScreenPoint(this.transform.position);
         dialogueBox.transform.position = targetLoc + dialogueBoxDisplacement;
@@ -175,11 +181,12 @@ public class Player : MonoBehaviour
     // and calculates parallax
     private void setCamera()
     {
-        float arbitraryMax = 10f;
         mainCamera.transform.position = new Vector3(getCameraXPos(), 0, mainCamera.transform.position.z);
-        for(int i = 0; i < backgroundParent.childCount - 1; i++) {
-            float targetX = this.transform.position.x / RIGHT_WORLD_LIMIT * arbitraryMax * i / backgroundParent.childCount;
+        for (int i = 0; i < backgroundParent.childCount - 2; i++)
+        {
+            float targetX = mainCamera.transform.position.x / RIGHT_CAMERA_LIMIT * PARALLAX_FACTOR * i / (backgroundParent.childCount - 2);
             backgroundParent.GetChild(i).position = new Vector3(targetX, 0, 0);
+
         }
     }
 

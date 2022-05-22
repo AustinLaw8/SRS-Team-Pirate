@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 258756820}
   - component: {fileID: 258756819}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -695,17 +695,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 538684245, guid: b5249fb433e00488289a799d14828b2a, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 538684245, guid: b5249fb433e00488289a799d14828b2a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 538684245, guid: b5249fb433e00488289a799d14828b2a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210694215856544328, guid: b5249fb433e00488289a799d14828b2a, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210694215856544329, guid: b5249fb433e00488289a799d14828b2a, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210694215856544329, guid: b5249fb433e00488289a799d14828b2a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 80f4e2aeb41ad4b7ba93e22bce989f64, type: 3}
     - target: {fileID: 6210694215856544330, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6210694215856544330, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36
+      value: -35.3
       objectReference: {fileID: 0}
     - target: {fileID: 6210694215856544330, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.1
+      value: -2.9
       objectReference: {fileID: 0}
     - target: {fileID: 6210694215856544330, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -738,6 +762,18 @@ PrefabInstance:
     - target: {fileID: 6210694215856544330, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210694215856544331, guid: b5249fb433e00488289a799d14828b2a, type: 3}
+      propertyPath: m_Size.y
+      value: 3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210694215856544331, guid: b5249fb433e00488289a799d14828b2a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210694215856544331, guid: b5249fb433e00488289a799d14828b2a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 6210694215856544342, guid: b5249fb433e00488289a799d14828b2a, type: 3}
       propertyPath: m_Name
@@ -856,7 +892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408475199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2108532741}
@@ -899,9 +935,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 74944435
-  m_SortingLayer: -1
-  m_SortingOrder: 6
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6020c865c584d493690b9d7db1f1e217, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1368,7 +1404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108532740}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458710681}
