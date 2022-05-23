@@ -9,8 +9,10 @@ public class TargetReticle : MonoBehaviour
 {
 
     private Rigidbody2D rb;
+
+    private SpriteRenderer sprRend;
     
-    [SerializeField] private float range = 6.0f;
+    [SerializeField] private float range = 1.5f;
 
     // Big issue = probably buggy when multiple enemies under reticle
     private Damageable enemyToHit;
@@ -27,6 +29,9 @@ public class TargetReticle : MonoBehaviour
     {
         // Use inspector to add player? 
         // But can hardcode here if applicable
+        sprRend = gameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
+        sprRend.drawMode = SpriteDrawMode.Sliced;
+        sprRend.size = new Vector2(0.4f, 0.4f);
     }
 
     // Collision or trigger?
@@ -47,7 +52,7 @@ public class TargetReticle : MonoBehaviour
             if (hit.collider != null)
             {
                 //If the object hit is less than or equal to 6 units away from this object.
-                if (hit.distance <= range)
+                if (playerToEnemy.magnitude <= range)
                 {
                     Damageable enemyDamageHub = enemyTarget.gameObject.GetComponent<Damageable>();
                     //Debug.Log("Enemy in range, dist:" + hit.distance + " point:" + hit.point);
@@ -57,6 +62,7 @@ public class TargetReticle : MonoBehaviour
                     }
                 } else {
                     //Debug.Log("Enemy outside 6.0f, dist:" + hit.distance);
+                    enemyToHit = null;
                 }
             }
         }
