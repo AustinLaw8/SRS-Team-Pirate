@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))] 
+[RequireComponent(typeof(SpriteRenderer))]
 
 public class EnemyRandMovement : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class EnemyRandMovement : MonoBehaviour
     private float turnTimerDistTrav = 0.0f;
     private float jumpTimerDistTrav = 0.0f;
     Vector3 enemyToPlayer;
+    private SpriteRenderer sp;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class EnemyRandMovement : MonoBehaviour
         //Only 1 player
         player = GameObject.Find("Player");
         rb = this.GetComponent<Rigidbody2D>();
+        sp = gameObject.GetComponent<SpriteRenderer>();
         enemyToPlayer = transform.position - player.transform.position;
     }
 
@@ -64,5 +67,6 @@ public class EnemyRandMovement : MonoBehaviour
         }
         turnTimerDistTrav += step;
         jumpTimerDistTrav += step;
+        sp.flipX = (gameObject.transform.position.x < player.transform.position.x);
     }
 }

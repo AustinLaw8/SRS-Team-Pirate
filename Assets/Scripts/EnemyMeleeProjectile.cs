@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))] 
+[RequireComponent(typeof(SpriteRenderer))]
 
 public class EnemyMeleeProjectile : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class EnemyMeleeProjectile : MonoBehaviour
     [SerializeField] private float range = 5.0f; // Auto disappears when exceeding range
     [SerializeField] private float speed = 1.0f;
     //[SerializeField] private float initVertForce = 0.0f;
+    private SpriteRenderer sp;
     private float dir = -1.0f;
 
     private float distTrav = 0.0f;
@@ -29,12 +31,15 @@ public class EnemyMeleeProjectile : MonoBehaviour
         // Only 1 player
         player = GameObject.Find("Player");
         rb = gameObject.GetComponent<Rigidbody2D>();
-        Vector2 projectileToPlayer = transform.position - player.transform.position;
+        sp = gameObject.GetComponent<SpriteRenderer>();
+        Vector3 projectileToPlayer = transform.position - player.transform.position;
+        /*
         if (projectileToPlayer.x > 0) {
             dir = -1;
         } else {
             dir = 1;
         }
+        */
     }
 
     // Upon contact, deal damage and explode
@@ -56,12 +61,16 @@ public class EnemyMeleeProjectile : MonoBehaviour
     {
         // Vector2 transform.position
         // player.transform.position
+        Vector3 projectileToPlayer = transform.position - player.transform.position;
         // Translate, and maybe rotate(?)
         if (distTrav >= range) {
             Destroy(gameObject);
         }
         float step = speed * Time.deltaTime; // calculate distance to move
-        transform.position += new Vector3(dir*step, 0, 0);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position - projectileToPlayer, step);
+
+        sp.flipX = (projectileToPlayer.x < 0);
+
         distTrav += step;
     }
 }

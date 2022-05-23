@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4101033287980484587}
   - component: {fileID: 4101033287980484586}
-  - component: {fileID: 4101033287980484585}
   - component: {fileID: 4101033287980484584}
   - component: {fileID: 4101033287980484580}
   - component: {fileID: 4101033287980484581}
+  - component: {fileID: 426030055373655611}
   m_Layer: 9
   m_Name: EnemyRangedProjectile
   m_TagString: Enemy
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4101033287980484591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 2, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 0d267bc78a0864eb48358689b29ed20a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3d241496a5bd495cab1017c30f06a10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,21 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4101033287980484585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4101033287980484591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f22507ac470f4190b011660a5d10067, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 6.5
-  speed: 3.5
-  sourceEnemy: {fileID: 0}
 --- !u!50 &4101033287980484584
 Rigidbody2D:
   serializedVersion: 4
@@ -116,7 +101,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 0.6
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -137,7 +122,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.15
 --- !u!114 &4101033287980484581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,4 +135,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e63894aafc34ade84c44f1e4bc0012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 1
+--- !u!114 &426030055373655611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101033287980484591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41881b244867d4438bb9d5ed78616997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initVertForce: 2.5
+  range: 8
+  speed: 4.5
+  sourceEnemy: {fileID: 0}

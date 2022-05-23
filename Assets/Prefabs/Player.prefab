@@ -126,7 +126,7 @@ MonoBehaviour:
   backgroundParent: {fileID: 0}
   basAtkRet: {fileID: 0}
   speed: 3
-  jumpForce: 3
+  jumpForce: 5
   interactableMask:
     serializedVersion: 2
     m_Bits: 128

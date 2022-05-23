@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))] 
+[RequireComponent(typeof(SpriteRenderer))] 
 
 public class EnemyRangedProjectile : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class EnemyRangedProjectile : MonoBehaviour
     [SerializeField] private float range = 5.0f; // Auto disappears when exceeding range
     [SerializeField] private float speed = 1.0f;
     //[SerializeField] private float initVertForce = 0.0f;
+    private SpriteRenderer sp;
     private float dir = -1.0f;
 
     private float distTrav = 0.0f;
@@ -31,6 +33,7 @@ public class EnemyRangedProjectile : MonoBehaviour
         // Only 1 player
         player = GameObject.Find("Player");
         rb = gameObject.GetComponent<Rigidbody2D>();
+        sp = gameObject.GetComponent<SpriteRenderer>();
         Vector2 projectileToPlayer = transform.position - player.transform.position;
         if (projectileToPlayer.x > 0) {
             dir = -1;
@@ -66,6 +69,9 @@ public class EnemyRangedProjectile : MonoBehaviour
         }
         float step = speed * Time.deltaTime; // calculate distance to move
         transform.position += new Vector3(dir*step, 0, 0);
+
+        sp.flipX = (dir > 0);
+
         distTrav += step;
     }
 }
