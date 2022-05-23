@@ -419,18 +419,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 9182186485412166146, guid: 4fd0226851cf2403b8c8109a8f6f8770, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1375602119}
-    - target: {fileID: 9182186485412166146, guid: 4fd0226851cf2403b8c8109a8f6f8770, type: 3}
-      propertyPath: jumpForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9182186485412166146, guid: 4fd0226851cf2403b8c8109a8f6f8770, type: 3}
-      propertyPath: jumpActivateDist
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 9182186485412166148, guid: 4fd0226851cf2403b8c8109a8f6f8770, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -633,18 +621,6 @@ PrefabInstance:
     - target: {fileID: 5730297643841786617, guid: f63fdc27963644ddcac4c5e40c5635d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5730297643841786618, guid: f63fdc27963644ddcac4c5e40c5635d4, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1375602119}
-    - target: {fileID: 5730297643841786618, guid: f63fdc27963644ddcac4c5e40c5635d4, type: 3}
-      propertyPath: jumpForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5730297643841786618, guid: f63fdc27963644ddcac4c5e40c5635d4, type: 3}
-      propertyPath: jumpActivateDist
-      value: 2.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f63fdc27963644ddcac4c5e40c5635d4, type: 3}

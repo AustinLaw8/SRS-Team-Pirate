@@ -20,10 +20,11 @@ public class Player : MonoBehaviour
     [SerializeField] public List<Ability> abilities = new List<Ability> { };
     [SerializeField] private TargetReticle basAtkRet;
     [SerializeField] private float speed = 3f;
-    [SerializeField] private float jumpForce = 3f;
+    [SerializeField] private float jumpForce = 5f;
     private Rigidbody2D rb;
     private float x_vel;
     private Vector2 facing;
+    private bool controllable;
 
     // For dealing with world interaction
     [SerializeField] private LayerMask interactableMask;
