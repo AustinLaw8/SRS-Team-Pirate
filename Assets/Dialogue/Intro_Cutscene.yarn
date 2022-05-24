@@ -1,0 +1,20 @@
+﻿title: Intro_Cutscene
+tags:
+---
+Mikhail: Good work back there, lassie. Yer fittin’ in nicely.
+MC: Of course, cap’n! Those hagglin’ bandits were nothing compared to my cutlass!
+Mikhail: Eager to please, eh? Well hopefully it was worth the trouble to get these crystals off ‘em. That damned wizard better pay his fair share.
+MC: I can guarantee he will.
+Mikhail: Oh? Then shall I send you to make the trade?
+MC: I’d be happy to, cap’n!
+Mikhail: In that case, take the crystals. Yer lookin’ fer a one Milton Grayborough. Should be in the town past the jungle, but if ye don’t find ‘im, ask around. I got some other business to attend to.
+MC: Aye aye, Captain Mikhail!
+Mikhail: Land ahoy! We’re docking, make yer preparations and be off!
+
+// [Ship docks at the Island Port and player assumes control over MC]
+
+// [Floating text in the sky somewhere explains basic movement and jump controls]
+
+MC: Alright, time to meet Milton. Just past the jungle, shouldn’t be too bad.
+
+===

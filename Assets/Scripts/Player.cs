@@ -11,11 +11,11 @@ public class Player : MonoBehaviour
     private static float LEFT_CAMERA_LIMIT = -35f;
     private static float RIGHT_CAMERA_LIMIT = 35f;
     private static float PARALLAX_FACTOR = 5f;
-    private static Vector3 dialogueBoxDisplacement = new Vector3(0, 100, 0);
+    // private static Vector3 dialogueBoxDisplacement = new Vector3(0, 100, 0);
 
     // Outside GameObjects and fields we want access to
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private GameObject dialogueBox;
+    // [SerializeField] private GameObject dialogueBox;
     [SerializeField] private Transform backgroundParent;
     [SerializeField] public List<Ability> abilities = new List<Ability> { };
     [SerializeField] private TargetReticle basAtkRet;
@@ -75,10 +75,10 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        if (dialogueBox == null)
-        {
-            dialogueBox = GameObject.Find("Line View");
-        }
+        // if (dialogueBox == null)
+        // {
+        //     dialogueBox = GameObject.Find("Line View");
+        // }
         if (mainCamera == null)
         {
             mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -91,34 +91,37 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputValue input)
     {
-        x_vel = input.Get<Vector2>().x * speed;
-
-        // Handles direction character is facing
-        if (x_vel > 0)
+        if (controllable)
         {
-            facing = Vector2.right;
-        }
-        else if (x_vel < 0)
-        {
-            facing = Vector2.left;
-        }
+            x_vel = input.Get<Vector2>().x * speed;
 
-
-        float yInput = input.Get<Vector2>().y;
-        if (yInput > 0)
-        {
-            if (groundedBox.IsTouchingLayers(groundMask.value))
+            // Handles direction character is facing
+            if (x_vel > 0)
             {
-                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                facing = Vector2.right;
             }
-        }
-        else if (yInput < 0)
-        {
-            // crouch() or dropdownplatform()
-        }
-        else
-        {
-            // do something? probably not
+            else if (x_vel < 0)
+            {
+                facing = Vector2.left;
+            }
+
+
+            float yInput = input.Get<Vector2>().y;
+            if (yInput > 0)
+            {
+                if (groundedBox.IsTouchingLayers(groundMask.value))
+                {
+                    rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                }
+            }
+            // else if (yInput < 0)
+            // {
+            //     // crouch() or dropdownplatform()
+            // }
+            // else
+            // {
+            //     // do something? probably not
+            // }
         }
     }
 
@@ -151,7 +154,7 @@ public class Player : MonoBehaviour
 
         setCamera();
         Vector3 targetLoc = mainCamera.WorldToScreenPoint(this.transform.position);
-        dialogueBox.transform.position = targetLoc + dialogueBoxDisplacement;
+        // dialogueBox.transform.position = targetLoc + dialogueBoxDisplacement;
     }
 
     public void OnUseAbility1(InputValue input) { abilities[0].action(); }
@@ -207,4 +210,7 @@ public class Player : MonoBehaviour
             return this.transform.position.x;
         }
     }
+
+    public void revokeControl() { controllable = false; }
+    public void returnControl() { controllable = true; }
 }
