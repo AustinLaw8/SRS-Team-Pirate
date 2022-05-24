@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a98898e1ecd324022846ded55ff65083, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4b2746482ddc4ff79d00b1a8af4ae95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &9182186485412166145
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -126,14 +126,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 3.6}
+    oldSize: {x: 1.55, y: 3.18}
     newSize: {x: 1, y: 0.8828125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 1, y: 3.2}
   m_EdgeRadius: 0
 --- !u!61 &-1258537099025209022
 BoxCollider2D:
@@ -152,14 +152,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 3.6}
+    oldSize: {x: 1.55, y: 3.18}
     newSize: {x: 1, y: 0.8828125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 3.2}
   m_EdgeRadius: 0
 --- !u!114 &9182186485412166144
 MonoBehaviour:
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e63894aafc34ade84c44f1e4bc0012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
+  health: 6
 --- !u!114 &9182186485412166147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,8 +187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myProjectile: {fileID: 4101033287980484591, guid: 8b77b6b44621c4ccea3f4262e5463694, type: 3}
-  firingHz: 0.4
-  vertOffset: 3.5
+  firingHz: 0.6
+  vertOffset: 0.85
 --- !u!114 &9182186485412166146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,5 +204,5 @@ MonoBehaviour:
   jumpActivateDist: 7
   jumpForce: 5
   turnDist: 0.75
-  speed: 0.5
+  speed: 2.5
   range: 6
