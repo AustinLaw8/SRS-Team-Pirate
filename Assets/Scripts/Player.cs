@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 
 public class Player : MonoBehaviour
 {
+    private static Player playerInstance;
     private static float LEFT_CAMERA_LIMIT = -35f;
     private static float RIGHT_CAMERA_LIMIT = 35f;
     private static float PARALLAX_FACTOR = 5f;
@@ -45,6 +47,15 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
+        if (playerInstance == null) {
+         playerInstance = this;
+        } else {
+            Destroy(gameObject);
+        }
+        Debug.Log("Awake");
+        SceneManager.activeSceneChanged += OnSceneLoad;
+
         rb = this.GetComponent<Rigidbody2D>();
         basAtkRet = null;
         Transform targetRet = this.gameObject.transform.Find("TargetReticle");
@@ -74,15 +85,14 @@ public class Player : MonoBehaviour
         interactableFilter.useTriggers = true;
         x_vel = 0;
 
+        controllable = true;
         sp = GetComponent<SpriteRenderer>();
     }
 
     void Start()
     {
-        // if (dialogueBox == null)
-        // {
-        //     dialogueBox = GameObject.Find("Line View");
-        // }
+        Debug.Log("Start");
+
         if (mainCamera == null)
         {
             mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -118,14 +128,6 @@ public class Player : MonoBehaviour
                     rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                 }
             }
-            // else if (yInput < 0)
-            // {
-            //     // crouch() or dropdownplatform()
-            // }
-            // else
-            // {
-            //     // do something? probably not
-            // }
         }
     }
 
@@ -157,8 +159,6 @@ public class Player : MonoBehaviour
         sp.flipX = facing == Vector2.right;
 
         setCamera();
-        Vector3 targetLoc = mainCamera.WorldToScreenPoint(this.transform.position);
-        // dialogueBox.transform.position = targetLoc + dialogueBoxDisplacement;
     }
 
     public void OnUseAbility1(InputValue input) { abilities[0].action(); }
@@ -194,7 +194,6 @@ public class Player : MonoBehaviour
         {
             float targetX = mainCamera.transform.position.x / RIGHT_CAMERA_LIMIT * PARALLAX_FACTOR * i / (backgroundParent.childCount - 2);
             backgroundParent.GetChild(i).position = new Vector3(targetX, 0, 0);
-
         }
     }
 
@@ -213,6 +212,12 @@ public class Player : MonoBehaviour
         {
             return this.transform.position.x;
         }
+    }
+
+    public void OnSceneLoad(Scene current, Scene next)
+    {
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        backgroundParent = GameObject.Find("WorldBackground").transform;
     }
 
     public void revokeControl() { controllable = false; }
