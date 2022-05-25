@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     // [SerializeField] private GameObject dialogueBox;
     [SerializeField] private Transform backgroundParent;
-    [SerializeField] public List<Ability> abilities = new List<Ability> { };
+    [SerializeField] public List<Ability> abilities = new List<Ability>();
     [SerializeField] private TargetReticle basAtkRet;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float jumpForce = 5f;
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private float x_vel;
     private Vector2 facing;
     private bool controllable;
+    private List<Quest> quests = new List<Quest>();
 
     // For dealing with world interaction
     [SerializeField] private LayerMask interactableMask;
@@ -38,6 +39,9 @@ public class Player : MonoBehaviour
 
     // Sprite 
     private SpriteRenderer sp;
+
+    // Quests
+    [SerializeField] private Quest currentQuest;
 
     void Awake()
     {
@@ -213,4 +217,6 @@ public class Player : MonoBehaviour
 
     public void revokeControl() { controllable = false; }
     public void returnControl() { controllable = true; }
+    public bool isControllable() { return controllable; }
+    public Quest getCurrentQuest() { return currentQuest; }
 }

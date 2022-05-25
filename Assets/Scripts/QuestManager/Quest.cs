@@ -16,20 +16,22 @@ public class Quest : ScriptableObject
 
     public info information;
 
-    [System.Serializable]
-    public struct stat{
-        public int xp;
-        public int gold;
-    }
+    // [System.Serializable]
+    // public struct stat{
+    //     public int xp;
+    //     public int gold;
+    // }
 
-    public stat reward = new stat {gold = 0, xp = 0};
+    // public stat reward = new stat {gold = 0, xp = 0};
     public bool completed {get; protected set;}
+    public bool initialized;
     public QuestCompletionEvent completionEvent;
 
     public List<Task> tasks;
 
     public void initialize(){
         completed = false;
+        initialized = false;
         completionEvent = new QuestCompletionEvent();
 
         foreach (var task in tasks){
@@ -61,7 +63,7 @@ public class QuestCompletionEvent : UnityEvent<Quest> {}
 public class QuestEditor : Editor
 {
     SerializedProperty questInfo;
-    SerializedProperty questReward;
+    // SerializedProperty questReward;
 
     List<string> questTaskTypes;
     SerializedProperty questTaskList;
@@ -81,7 +83,7 @@ public class QuestEditor : Editor
         //Initialize Property of Quest Info Struct
         questInfo = serializedObject.FindProperty(nameof(Quest.information));
         //Initialize Property of Quest Reward Stat Struct
-        questReward = serializedObject.FindProperty(nameof(Quest.reward));
+        // questReward = serializedObject.FindProperty(nameof(Quest.reward));
         //Initilize Property of List of Quest Tasks
         questTaskList = serializedObject.FindProperty(nameof(Quest.tasks));
         
@@ -107,16 +109,16 @@ public class QuestEditor : Editor
             child.NextVisible(false);
         }
         
-        child = questReward.Copy();
-        depth = child.depth;
-        child.NextVisible(true);
+        // child = questReward.Copy();
+        // depth = child.depth;
+        // child.NextVisible(true);
         
-        EditorGUILayout.LabelField("Quest reward", EditorStyles.boldLabel);
-        while (child.depth > depth)
-        {
-            EditorGUILayout.PropertyField(child, true);
-            child.NextVisible(false);
-        }
+        // EditorGUILayout.LabelField("Quest reward", EditorStyles.boldLabel);
+        // while (child.depth > depth)
+        // {
+        //     EditorGUILayout.PropertyField(child, true);
+        //     child.NextVisible(false);
+        // }
         
         int choice = EditorGUILayout.Popup("Add new Task", -1, questTaskTypes.ToArray());
 

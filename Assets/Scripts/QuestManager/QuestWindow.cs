@@ -10,33 +10,37 @@ public class QuestWindow : MonoBehaviour
     [SerializeField] private Text descriptionText;
     [SerializeField] private GameObject taskPrefab;
     [SerializeField] private Transform taskContent;
-    [SerializeField] private Text xp;
-    [SerializeField] private Text gold;
+    // [SerializeField] private Text xp;
+    // [SerializeField] private Text gold;
 
     public void initialize(Quest quest)
     {
-        titleText.text = quest.information.name;
-        descriptionText.text = quest.information.description;
-        //KillingTask.onUpdateKillCount += updateCount;
-
-        foreach (var task in quest.tasks)
+        Debug.Log(quest.initialized);
+        if (!quest.initialized) 
         {
-            GameObject taskObj = Instantiate(taskPrefab, taskContent);
-            taskObj.transform.Find("Text").GetComponent<Text>().text = task.getDescription();
+            titleText.text = quest.information.name;
+            descriptionText.text = quest.information.description;
+            //KillingTask.onUpdateKillCount += updateCount;
+            foreach (var task in quest.tasks)
+            {
+                GameObject taskObj = Instantiate(taskPrefab, taskContent);
+                taskObj.transform.Find("Text").GetComponent<Text>().text = task.getDescription();
 
-            GameObject countObj = taskObj.transform.Find("Count").gameObject;
+                GameObject countObj = taskObj.transform.Find("Count").gameObject;
 
-            if (task.completed) {
-                countObj.SetActive(false);
-                taskObj.transform.Find("Done").gameObject.SetActive(true);
+                if (task.completed) {
+                    countObj.SetActive(false);
+                    taskObj.transform.Find("Done").gameObject.SetActive(true);
+                }
+                else {
+                    countObj.GetComponent<Text>().text = task.curAmount + "/" + task.reqAmount;
+                }
             }
-            else {
-                countObj.GetComponent<Text>().text = task.curAmount + "/" + task.reqAmount;
-            }
+            quest.initialized = true;
         }
 
-        xp.text = quest.reward.xp.ToString();
-        gold.text = quest.reward.gold.ToString();
+        // xp.text = quest.reward.xp.ToString();
+        // gold.text = quest.reward.gold.ToString();
     }
 
 /*

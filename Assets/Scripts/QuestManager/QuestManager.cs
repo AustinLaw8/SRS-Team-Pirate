@@ -6,36 +6,42 @@ using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
-   [SerializeField] private GameObject questPrefab;
-   [SerializeField] private Transform questsContent;
-   [SerializeField] private GameObject questHolder;
+    [SerializeField] private GameObject questPrefab;
+    [SerializeField] private Transform questsContent;
+    [SerializeField] private GameObject questWindow;
+    [SerializeField] private Player player;
 
-   public List<Quest> currentQuests;
+    private Quest currentQuest;
 
-   private void Awake()
-   {
-      foreach (var quest in currentQuests)
-      {
-         quest.initialize();
-         quest.completionEvent.AddListener(onQuestCompleted);
-         
-         GameObject questObj = Instantiate(questPrefab, questsContent);
-         questObj.transform.Find("Icon").GetComponent<Image>().sprite = quest.information.icon;
-         
-         questObj.GetComponent<Button>().onClick.AddListener(delegate
-         {
-            questHolder.GetComponent<QuestWindow>().initialize(quest);
-            questHolder.SetActive(true);
-         });
-      }
-   }
+    private void Start()
+    {
+        currentQuest = player.getCurrentQuest();
+        currentQuest.initialize();
+        currentQuest.completionEvent.AddListener(onQuestCompleted);
 
-   public void kill(string mobName){
-      EventManager.Instance.QueueEvent(new KillEvent(mobName));
-   }
+        GameObject questObj = Instantiate(questPrefab, questsContent);
+        questObj.transform.Find("Icon").GetComponent<Image>().sprite = currentQuest.information.icon;
 
-   private void onQuestCompleted(Quest quest)
-   {
-      questsContent.GetChild(currentQuests.IndexOf(quest)).Find("Checkmark").gameObject.SetActive(true);
-   }
+        questObj.GetComponent<Button>().onClick.AddListener(delegate
+        {
+            if(player.isControllable())
+            {
+                questWindow.SetActive(!questWindow.activeSelf);
+                if (questWindow.activeSelf)
+                {
+                    questWindow.GetComponent<QuestWindow>().initialize(currentQuest);
+                }
+            }
+        });
+    }
+
+    public void kill(string mobName)
+    {
+        EventManager.Instance.QueueEvent(new KillEvent(mobName));
+    }
+
+    private void onQuestCompleted(Quest quest)
+    {
+        // currentQuest.Find("Checkmark").gameObject.SetActive(true);
+    }
 }

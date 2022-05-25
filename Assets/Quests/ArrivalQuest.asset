@@ -10,34 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a847ea4cfc84fbd4c851778ad72168cb, type: 3}
-  m_Name: Arrival_quest
+  m_Name: ArrivalQuest
   m_EditorClassIdentifier: 
   information:
     name: Arrival
-    description: Talk to two characters
+    description: Land ho! Find Milton in town, and deliver the crystals to claim
+      your reward!
     icon: {fileID: 0}
-  reward:
-    xp: 5
-    gold: 5
+  initialized: 1
   tasks:
   - {fileID: 4156302843647212248}
-  - {fileID: 1313653233566045928}
---- !u!114 &1313653233566045928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbc9cf8f5e454939add48abc44a4e67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskDescription: Talk to Jane Doe.
-  reqAmount: 1
-  curAmount: 0
-  npcName: Jane Doe
 --- !u!114 &4156302843647212248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,7 +32,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cbc9cf8f5e454939add48abc44a4e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskDescription: Talk to John Doe.
+  taskDescription: Deliver the crystals to Milton
   reqAmount: 1
   curAmount: 0
-  npcName: John Doe
+  npcName: Milton
