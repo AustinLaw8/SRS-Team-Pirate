@@ -44,12 +44,13 @@ public class Player : MonoBehaviour
 
     // Quests
     [SerializeField] private Quest currentQuest;
+    [SerializeField] private GameObject questCanvas;
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
         if (playerInstance == null) {
-         playerInstance = this;
+            playerInstance = this;
         } else {
             Destroy(gameObject);
         }
@@ -91,7 +92,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Start");
+        DontDestroyOnLoad(questCanvas);
 
         if (mainCamera == null)
         {
