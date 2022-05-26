@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4577033550694098379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbc9cf8f5e454939add48abc44a4e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskDescription: Return to the Captain
+  reqAmount: 1
+  curAmount: 0
+  npcName: Captain
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a847ea4cfc84fbd4c851778ad72168cb, type: 3}
+  m_Name: ArrivalQuest2
+  m_EditorClassIdentifier: 
+  information:
+    name: Arrival Part 2
+    description: Land ho! Find Milton in town, and deliver the crystals to claim
+      your reward!
+    icon: {fileID: 0}
+  initialized: 0
+  tasks:
+  - {fileID: -4577033550694098379}

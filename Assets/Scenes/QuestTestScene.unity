@@ -1234,9 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questPrefab: {fileID: 5031371662015342874, guid: 8515c170843772040854c8a31090e15b, type: 3}
   questsContent: {fileID: 2002736342}
-  questHolder: {fileID: 1424178770}
-  currentQuests:
-  - {fileID: 11400000, guid: 5fde5b5bb8baa3b4588e5c16a43d7458, type: 2}
+  questWindow: {fileID: 1424178770}
 --- !u!114 &738147249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2068,8 +2066,6 @@ MonoBehaviour:
   descriptionText: {fileID: 805445542}
   taskPrefab: {fileID: 5457204738414809424, guid: 701ca870661c39542967b9c0e219a773, type: 3}
   taskContent: {fileID: 1217654701}
-  xp: {fileID: 1011451949}
-  gold: {fileID: 1175127155}
 --- !u!114 &1424178773
 MonoBehaviour:
   m_ObjectHideFlags: 0

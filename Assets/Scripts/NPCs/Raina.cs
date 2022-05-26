@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Captain : Interactable
+public class Raina : Interactable
 {
     // Update is called once per frame
     public override void interact(Player player)
     {
         switch (player.stage) 
         {
-            case 1:
-                player.playDialogue("Arrival_Speak_To_Captain", this.transform.name);
+            case 4:
+                player.playDialogue("OddJobs_Speak_To_Raina", this.transform.name);
                 break;
             default:
-                Debug.Log("Not in the right stage for Captain");
+                Debug.Log("Not in the right stage for Raina");
                 break;
         }
     }

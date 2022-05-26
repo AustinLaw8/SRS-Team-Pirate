@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-139924177427210104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbc9cf8f5e454939add48abc44a4e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskDescription: Find and speak to the shopkeep, Raina.
+  reqAmount: 1
+  curAmount: 0
+  npcName: Raina
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a847ea4cfc84fbd4c851778ad72168cb, type: 3}
+  m_Name: OddJobs3
+  m_EditorClassIdentifier: 
+  information:
+    name: Odd Jobs Part 3
+    description: Now that you are fresh off the boat, you should try searching for
+      a new job. Maybe that Miss Salcrest could help you?
+    icon: {fileID: 0}
+  initialized: 0
+  tasks:
+  - {fileID: -139924177427210104}

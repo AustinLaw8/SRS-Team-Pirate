@@ -10,17 +10,12 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private Transform questsContent;
     [SerializeField] private GameObject questWindow;
     //[SerializeField] private Player player;
-
+    private GameObject questObj;
     private Quest currentQuest;
 
-    private void Start()
+    private void Awake()
     {
-        currentQuest = Player.MyPlayer.getCurrentQuest();
-        currentQuest.initialize();
-        currentQuest.completionEvent.AddListener(onQuestCompleted);
-
-        GameObject questObj = Instantiate(questPrefab, questsContent);
-        questObj.transform.Find("Icon").GetComponent<Image>().sprite = currentQuest.information.icon;
+        questObj = Instantiate(questPrefab, questsContent);
 
         questObj.GetComponent<Button>().onClick.AddListener(delegate
         {
@@ -31,8 +26,20 @@ public class QuestManager : MonoBehaviour
                 {
                     questWindow.GetComponent<QuestWindow>().initialize(currentQuest);
                 }
+                else
+                {
+                    questWindow.GetComponent<QuestWindow>().closeWindow();
+                }
             }
         });
+    }
+
+    public void initQuest() {
+        currentQuest = Player.MyPlayer.getCurrentQuest();
+        currentQuest.initialize();
+        // currentQuest.completionEvent.AddListener(onQuestCompleted);
+        questObj.transform.Find("Icon").GetComponent<Image>().sprite = currentQuest.information.icon;
+        if (Player.MyPlayer.stage == -1) Player.MyPlayer.playDialogue("Intro_Cutscene", "Captain");
     }
 
     public void kill(string mobName)

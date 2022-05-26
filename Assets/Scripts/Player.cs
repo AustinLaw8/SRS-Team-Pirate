@@ -48,11 +48,14 @@ public class Player : MonoBehaviour
 
     // Quests
     [SerializeField] private Quest currentQuest;
+    [SerializeField] private List<Quest> quests;
     [SerializeField] private GameObject questCanvas;
     [SerializeField] private GameObject dialogueSystem;
-    public DialogueRunner dialogueRunner;
+    [SerializeField] private GameObject eventManager;
+    private DialogueRunner dialogueRunner;
+    private QuestManager questManager;
 
-    public int stage = 0;
+    public int stage = -1;
 
     void Awake()
     {
@@ -70,7 +73,6 @@ public class Player : MonoBehaviour
         } else {
             playerInstance = this;
         }
-        Debug.Log("Awake");
         SceneManager.activeSceneChanged += OnSceneLoad;
 
         rb = this.GetComponent<Rigidbody2D>();
@@ -104,12 +106,14 @@ public class Player : MonoBehaviour
 
         controllable = true;
         sp = GetComponent<SpriteRenderer>();
+        currentQuest = quests[0];
     }
 
     void Start()
     {
         DontDestroyOnLoad(questCanvas);
         DontDestroyOnLoad(dialogueSystem);
+        DontDestroyOnLoad(eventManager);
         dialogueRunner = dialogueSystem.GetComponent<DialogueRunner>();
 
         if (mainCamera == null)
@@ -122,7 +126,8 @@ public class Player : MonoBehaviour
         }
 
         OnSceneLoad(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
-        if (stage == 0) playDialogue("Intro_Cutscene", "Captain");
+        questManager = questCanvas.transform.GetChild(0).gameObject.GetComponent<QuestManager>();
+        questManager.initQuest();
     }
 
     public void OnMove(InputValue input)
@@ -161,7 +166,6 @@ public class Player : MonoBehaviour
         interactBox.OverlapCollider(interactableFilter, results);
         foreach (var e in results)
         {
-            // Debug.Log(e.transform.name);
             e.transform.gameObject.GetComponent<Interactable>().interact(this);
         }
     }
@@ -236,20 +240,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void playNextDialogue(string scene_loaded)
-    {
-        switch (scene_loaded)
-        {
-            case "BeachZone":
-                break;
-            case "JungleZone":
-                break;
-            default:
-                Debug.Log("NotImplementedError");
-                break;
-        }
-    }
-
     public void OnSceneLoad(Scene current, Scene next)
     {
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -267,11 +257,14 @@ public class Player : MonoBehaviour
         }
         if (questCanvas == null) {
             questCanvas = GameObject.Find("QuestCanvas");
-            Debug.Log(questCanvas);
         }
-        questCanvas.transform.GetChild(0).gameObject.GetComponent<QuestManager>().talk(npcName);
+        questManager.talk(npcName);
         dialogueRunner.StartDialogue(nodeName);
         stage += 1;
+        if (stage < quests.Count) {
+            currentQuest = quests[stage];
+            questManager.initQuest();
+        }
     }
 
     public void revokeControl() { controllable = false; rb.velocity = Vector3.zero; }
@@ -282,7 +275,6 @@ public class Player : MonoBehaviour
     // MOVED FROM PROJECTILES TO ACCOUNT FOR DontDestroyOnLoad
     void OnTriggerEnter2D(Collider2D p) 
     {
-        //Debug.Log("on player");
         if (p.gameObject.tag == "Projectile") {
             this.GetComponent<Damageable>().applyDamage(1);
             Destroy(p.gameObject);

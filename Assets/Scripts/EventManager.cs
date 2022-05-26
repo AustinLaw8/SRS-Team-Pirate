@@ -36,6 +36,12 @@ public class EventManager : MonoBehaviour {
     private Dictionary<System.Delegate, EventDelegate> delegateLookup = new Dictionary<System.Delegate, EventDelegate>();
     private Dictionary<System.Delegate, System.Delegate> onceLookups = new Dictionary<System.Delegate, System.Delegate>();
 
+    void Awake() {
+        if (s_Instance != null) {
+            Destroy(this.gameObject);
+        }
+    }
+
     // override so we don't have the typecast the object
     public static EventManager Instance {
         get {

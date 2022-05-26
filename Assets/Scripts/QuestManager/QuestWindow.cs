@@ -15,30 +15,24 @@ public class QuestWindow : MonoBehaviour
 
     public void initialize(Quest quest)
     {
-        Debug.Log(quest.initialized);
-        if (!quest.initialized) 
+        titleText.text = quest.information.name;
+        descriptionText.text = quest.information.description;
+        //KillingTask.onUpdateKillCount += updateCount;
+        foreach (var task in quest.tasks)
         {
-            titleText.text = quest.information.name;
-            descriptionText.text = quest.information.description;
-            //KillingTask.onUpdateKillCount += updateCount;
-            foreach (var task in quest.tasks)
-            {
-                GameObject taskObj = Instantiate(taskPrefab, taskContent);
-                taskObj.transform.Find("Text").GetComponent<Text>().text = task.getDescription();
+            GameObject taskObj = Instantiate(taskPrefab, taskContent);
+            taskObj.transform.Find("Text").GetComponent<Text>().text = task.getDescription();
 
-                GameObject countObj = taskObj.transform.Find("Count").gameObject;
+            GameObject countObj = taskObj.transform.Find("Count").gameObject;
 
-                if (task.completed) {
-                    countObj.SetActive(false);
-                    taskObj.transform.Find("Done").gameObject.SetActive(true);
-                }
-                else {
-                    countObj.GetComponent<Text>().text = task.curAmount + "/" + task.reqAmount;
-                }
+            if (task.completed) {
+                countObj.SetActive(false);
+                taskObj.transform.Find("Done").gameObject.SetActive(true);
             }
-            quest.initialized = true;
+            else {
+                countObj.GetComponent<Text>().text = task.curAmount + "/" + task.reqAmount;
+            }
         }
-
         // xp.text = quest.reward.xp.ToString();
         // gold.text = quest.reward.gold.ToString();
     }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a847ea4cfc84fbd4c851778ad72168cb, type: 3}
-  m_Name: ArrivalQuest
+  m_Name: ArrivalQuest1
   m_EditorClassIdentifier: 
   information:
-    name: Arrival
+    name: Arrival Part 1
     description: Land ho! Find Milton in town, and deliver the crystals to claim
       your reward!
     icon: {fileID: 0}
@@ -34,5 +34,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskDescription: Deliver the crystals to Milton
   reqAmount: 1
-  curAmount: 0
+  curAmount: 1
   npcName: Milton

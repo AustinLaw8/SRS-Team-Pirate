@@ -24,14 +24,12 @@ public class Quest : ScriptableObject
 
     // public stat reward = new stat {gold = 0, xp = 0};
     public bool completed {get; protected set;}
-    public bool initialized;
     public QuestCompletionEvent completionEvent;
 
     public List<Task> tasks;
 
     public void initialize(){
         completed = false;
-        initialized = false;
         completionEvent = new QuestCompletionEvent();
 
         foreach (var task in tasks){
