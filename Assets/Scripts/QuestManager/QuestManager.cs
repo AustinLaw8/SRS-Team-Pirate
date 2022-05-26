@@ -40,6 +40,12 @@ public class QuestManager : MonoBehaviour
         EventManager.Instance.QueueEvent(new KillEvent(mobName));
     }
 
+
+    public void talk(string npcName)
+    {
+        EventManager.Instance.QueueEvent(new TalkToNpcEvent(npcName));
+    }
+
     private void onQuestCompleted(Quest quest)
     {
         // currentQuest.Find("Checkmark").gameObject.SetActive(true);

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1bfb5f6a2639f46feaaaa1d6ccfa6790
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  LastImportHadImplicitStringIDs: 0
+  LastImportHadAnyStrings: 0
+  isSuccessfullyParsed: 0
+  parseErrorMessages:
+  - 'Assets/Dialogue/Arrival_Speak_To_Captain.yarn: 0:-1: Error: Unexpected "<EOF>"
+    while reading a dialogue'

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Yarn.Unity;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -27,7 +28,6 @@ public class Player : MonoBehaviour
     private float x_vel;
     private Vector2 facing;
     private bool controllable;
-    private List<Quest> quests = new List<Quest>();
 
     // For dealing with world interaction
     [SerializeField] private LayerMask interactableMask;
@@ -45,6 +45,10 @@ public class Player : MonoBehaviour
     // Quests
     [SerializeField] private Quest currentQuest;
     [SerializeField] private GameObject questCanvas;
+    [SerializeField] private GameObject dialogueSystem;
+    public DialogueRunner dialogueRunner;
+
+    public int stage = 0;
 
     void Awake()
     {
@@ -54,7 +58,6 @@ public class Player : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
-        Debug.Log("Awake");
         SceneManager.activeSceneChanged += OnSceneLoad;
 
         rb = this.GetComponent<Rigidbody2D>();
@@ -93,6 +96,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(questCanvas);
+        DontDestroyOnLoad(dialogueSystem);
+        dialogueRunner = dialogueSystem.GetComponent<DialogueRunner>();
 
         if (mainCamera == null)
         {
@@ -102,6 +107,9 @@ public class Player : MonoBehaviour
         {
             backgroundParent = GameObject.Find("WorldBackground").transform;
         }
+
+        OnSceneLoad(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
+        if (stage == 0) playDialogue("Intro_Cutscene", "Captain");
     }
 
     public void OnMove(InputValue input)
@@ -140,8 +148,8 @@ public class Player : MonoBehaviour
         interactBox.OverlapCollider(interactableFilter, results);
         foreach (var e in results)
         {
-            Debug.Log(e.transform.name);
-            e.transform.gameObject.GetComponent<Interactable>().interactAction.Invoke();
+            // Debug.Log(e.transform.name);
+            e.transform.gameObject.GetComponent<Interactable>().interact(this);
         }
     }
 
@@ -158,7 +166,7 @@ public class Player : MonoBehaviour
         }
 
         sp.flipX = facing == Vector2.right;
-
+        if (dialogueRunner.IsDialogueRunning) { rb.velocity = Vector3.zero; }
         setCamera();
     }
 
@@ -215,13 +223,45 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void playNextDialogue(string scene_loaded)
+    {
+        switch (scene_loaded)
+        {
+            case "BeachZone":
+                break;
+            case "JungleZone":
+                break;
+            default:
+                Debug.Log("NotImplementedError");
+                break;
+        }
+    }
+
     public void OnSceneLoad(Scene current, Scene next)
     {
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         backgroundParent = GameObject.Find("WorldBackground").transform;
+        dialogueSystem = GameObject.Find("Dialogue System");
+        dialogueRunner = dialogueSystem.GetComponent<DialogueRunner>();
+        questCanvas = GameObject.Find("QuestCanvas");
+        // playNextDialogue(next.name);
     }
 
-    public void revokeControl() { controllable = false; }
+    public void playDialogue(string nodeName, string npcName) {
+        if (dialogueRunner == null) {
+            dialogueSystem = GameObject.Find("Dialogue System");
+            dialogueRunner = dialogueSystem.GetComponent<DialogueRunner>();
+        }
+        if (questCanvas == null) {
+            questCanvas = GameObject.Find("QuestCanvas");
+            Debug.Log(questCanvas);
+        }
+        questCanvas.transform.GetChild(0).gameObject.GetComponent<QuestManager>().talk(npcName);
+        dialogueRunner.StartDialogue(nodeName);
+        stage += 1;
+    }
+
+    public void revokeControl() { controllable = false; rb.velocity = Vector3.zero; }
     public void returnControl() { controllable = true; }
     public bool isControllable() { return controllable; }
     public Quest getCurrentQuest() { return currentQuest; }

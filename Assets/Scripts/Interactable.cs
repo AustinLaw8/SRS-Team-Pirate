@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Interactable : MonoBehaviour
+// [System.Serializable]
+// public class InteractEvent : UnityEvent<Player>
+// {
+// }
+
+public abstract class Interactable : MonoBehaviour
 {
     public bool inRange;
-    public UnityEvent interactAction;
 
-    // Start is called before the first frame update
+    public abstract void interact(Player player);
 }

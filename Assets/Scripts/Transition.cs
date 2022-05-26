@@ -21,7 +21,7 @@ public class Transition : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "Player") {
-            Debug.Log("Switching to scene: " + transitionTo);
+            // Debug.Log("Switching to scene: " + transitionTo);
             SceneManager.LoadScene(transitionTo);
             player.transform.position = destination;
             // SceneManager.SetActiveScene(SceneManager.GetSceneByName(transitionTo));
