@@ -18,6 +18,10 @@ public class Damageable : MonoBehaviour
 
     public void dropTarget() { targetable = false; }
 
+    public int getHealthLeft() { return health; }
+
+    public void setHealthLeft(int hp) { health = hp; }
+
     public void applyDamage(int damage) { 
         if (!targetable) {
             return;

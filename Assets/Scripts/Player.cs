@@ -7,6 +7,7 @@ using Yarn.Unity;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Damageable))]
 
 public class Player : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class Player : MonoBehaviour
     private float x_vel;
     private Vector2 facing;
     private bool controllable;
+    private int maxHealth = 30;
+    private float regenWait = 5.0f;
+    private float timeUntilRegen = 5.0f;
+    private int regenAmount = 1;
 
     // For dealing with world interaction
     [SerializeField] private LayerMask interactableMask;
@@ -182,6 +187,18 @@ public class Player : MonoBehaviour
             }
         }
 
+        timeUntilRegen -= Time.deltaTime;
+        if (timeUntilRegen < 0) {
+            timeUntilRegen = regenWait;
+            Damageable myDmg = this.GetComponent<Damageable>();
+            if (myDmg.getHealthLeft() < maxHealth) {
+                myDmg.applyDamage(-1*regenAmount);
+                if (myDmg.getHealthLeft() > maxHealth) {
+                    myDmg.setHealthLeft(maxHealth);
+                }
+            }
+        }
+
         sp.flipX = facing == Vector2.right;
         if (dialogueRunner.IsDialogueRunning) { rb.velocity = Vector3.zero; }
         setCamera();
@@ -247,6 +264,7 @@ public class Player : MonoBehaviour
         dialogueSystem = GameObject.Find("Dialogue System");
         dialogueRunner = dialogueSystem.GetComponent<DialogueRunner>();
         questCanvas = GameObject.Find("QuestCanvas");
+        this.GetComponent<Damageable>().setHealthLeft(maxHealth);
         // playNextDialogue(next.name);
     }
 
