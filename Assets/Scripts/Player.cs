@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(questCanvas);
-        DontDestroyOnLoad(dialogueSystem);
+        // DontDestroyOnLoad(dialogueSystem);
         DontDestroyOnLoad(eventManager);
         dialogueRunner = dialogueSystem.GetComponent<DialogueRunner>();
 

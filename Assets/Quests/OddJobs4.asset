@@ -15,9 +15,8 @@ MonoBehaviour:
   information:
     name: Odd Jobs Part 4
     description: Now that you are fresh off the boat, you should try searching for
-      a new job. Maybe that Miss Salcrest could help you?
+      a new job. Maybe try Miss Salcrest...?
     icon: {fileID: 0}
-  initialized: 0
   tasks:
   - {fileID: 8278692381800905595}
 --- !u!114 &8278692381800905595
@@ -34,5 +33,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskDescription: Return to Gustav
   reqAmount: 1
-  curAmount: 0
+  curAmount: 1
   npcName: Gustav

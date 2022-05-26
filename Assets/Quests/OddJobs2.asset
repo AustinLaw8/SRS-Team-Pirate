@@ -15,9 +15,8 @@ MonoBehaviour:
   information:
     name: Odd Jobs Part 2
     description: Now that you are fresh off the boat, you should try searching for
-      a new job. Maybe that Miss Salcrest could help you?
+      a new job. Maybe try Miss Salcrest...?
     icon: {fileID: 0}
-  initialized: 0
   tasks:
   - {fileID: 5954400869555443903}
 --- !u!114 &5954400869555443903
@@ -34,5 +33,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskDescription: Speak to Milton
   reqAmount: 1
-  curAmount: 0
+  curAmount: 1
   npcName: Milton

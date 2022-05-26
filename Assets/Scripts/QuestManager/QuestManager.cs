@@ -6,15 +6,26 @@ using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
+    private static GameObject questCanvasInstance;
+
     [SerializeField] private GameObject questPrefab;
     [SerializeField] private Transform questsContent;
     [SerializeField] private GameObject questWindow;
+    
     //[SerializeField] private Player player;
     private GameObject questObj;
     private Quest currentQuest;
 
     private void Awake()
     {
+
+        if (questCanvasInstance != null && questCanvasInstance != this)
+        {
+            Destroy(this.transform.parent.gameObject);
+        } else {
+            questCanvasInstance = this.transform.parent.gameObject;
+        }
+
         questObj = Instantiate(questPrefab, questsContent);
 
         questObj.GetComponent<Button>().onClick.AddListener(delegate
