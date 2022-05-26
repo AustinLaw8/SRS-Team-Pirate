@@ -9,13 +9,13 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private GameObject questPrefab;
     [SerializeField] private Transform questsContent;
     [SerializeField] private GameObject questWindow;
-    [SerializeField] private Player player;
+    //[SerializeField] private Player player;
 
     private Quest currentQuest;
 
     private void Start()
     {
-        currentQuest = player.getCurrentQuest();
+        currentQuest = Player.MyPlayer.getCurrentQuest();
         currentQuest.initialize();
         currentQuest.completionEvent.AddListener(onQuestCompleted);
 
@@ -24,7 +24,7 @@ public class QuestManager : MonoBehaviour
 
         questObj.GetComponent<Button>().onClick.AddListener(delegate
         {
-            if(player.isControllable())
+            if(Player.MyPlayer.isControllable())
             {
                 questWindow.SetActive(!questWindow.activeSelf);
                 if (questWindow.activeSelf)

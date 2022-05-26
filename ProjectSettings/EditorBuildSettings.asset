@@ -5,15 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/FinalScenes/JungleZone.unity
-    guid: bbf7b5502c9bba6489bec172ccb01c7d
-  - enabled: 1
     path: Assets/Scenes/FinalScenes/BeachZone.unity
     guid: aec8b3410903d477384562db7f31b435
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/JungleZone.unity
+    guid: bbf7b5502c9bba6489bec172ccb01c7d
   - enabled: 1
     path: Assets/Scenes/FinalScenes/TownZone.unity
     guid: 2156fd59c3d6446128b9451144032b1f

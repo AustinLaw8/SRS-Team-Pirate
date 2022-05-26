@@ -1144,7 +1144,6 @@ MonoBehaviour:
   questPrefab: {fileID: 5031371662015342874, guid: 8515c170843772040854c8a31090e15b, type: 3}
   questsContent: {fileID: 345141051}
   questWindow: {fileID: 530082569}
-  player: {fileID: 537288864}
 --- !u!114 &786980203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2630,7 +2629,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionTo: JungleZone
-  player: {fileID: 0}
   destination: {x: -40, y: -2.9, z: 0}
 --- !u!61 &1904867736
 BoxCollider2D:
@@ -3152,6 +3150,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 11}
   m_EdgeRadius: 0
+--- !u!1 &2116765524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8266464373023669736, guid: e070e33db26c04ddd98b3fe197db1207, type: 3}
+  m_PrefabInstance: {fileID: 1775265861}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2116765525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116765524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1997fab2b80234f199b1b1e0db7633eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2142439843
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,12 +6,12 @@ public abstract class Ability
 {
     [SerializeField] public int id;
     [SerializeField] public float Cooldown;
-    [SerializeField] public Player player;
+    //[SerializeField] public Player player;
     public float currentCooldown = 0;
 
-    public Ability(Player _player)
+    public Ability(/*Player _player*/)
     {
-        this.player = _player;
+        //this.player = _player;
     }
     public bool onCooldown()
     {
@@ -20,7 +20,7 @@ public abstract class Ability
 
     public void putOnCD()
     {
-        player.putOnCooldown(this);
+        Player.MyPlayer.putOnCooldown(this);
     }
 
     //Function to be overwritten when creating child class
@@ -30,7 +30,7 @@ public abstract class Ability
 
     public int getID() { return this.id; }
     public float getCooldown() { return this.Cooldown; }
-    public Player getPlayer() { return this.player; }
+    //public Player getPlayer() { return this.player; }
 
 
 }
@@ -38,11 +38,11 @@ public abstract class Ability
 class Test1 : Ability
 {
 
-    public Test1(Player _player) : base(_player)
+    public Test1(/*Player _player) : base(_player*/)
     {
         id = 0;
         Cooldown = 3;
-        player = _player;
+        //player = _player;
     }
     public override void action()
     {
@@ -59,11 +59,11 @@ class Test1 : Ability
 class Test2 : Ability
 {
 
-    public Test2(Player _player) : base(_player)
+    public Test2(/*Player _player) : base(_player*/)
     {
         id = 1;
         Cooldown = 5;
-        player = _player;
+        //player = _player;
     }
     public override void action()
     {
@@ -80,11 +80,11 @@ class Test2 : Ability
 class Test3 : Ability
 {
 
-    public Test3(Player _player) : base(_player)
+    public Test3(/*Player _player) : base(_player*/)
     {
         id = 2;
         Cooldown = 1;
-        player = _player;
+        //player = _player;
     }
     public override void action()
     {
@@ -101,11 +101,11 @@ class Test3 : Ability
 class Test4 : Ability
 {
 
-    public Test4(Player _player) : base(_player)
+    public Test4(/*Player _player) : base(_player*/)
     {
         id = 3;
         Cooldown = 20;
-        player = _player;
+        //player = _player;
     }
     public override void action()
     {
@@ -123,12 +123,12 @@ class BasicAttack : Ability {
 
     private TargetReticle basAtkRet;
 
-    public BasicAttack(Player _player, TargetReticle _basAtkRet) : base(_player)
+    public BasicAttack(/*Player _player, */TargetReticle _basAtkRet) /*: base(_player) */
     {
         basAtkRet = _basAtkRet;
         id = 4;
         Cooldown = 0.1f; // Needs attack speed
-        player = _player;
+        //player = _player;
     }
 
     public override void action()
