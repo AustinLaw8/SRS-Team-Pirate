@@ -10,6 +10,10 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private static Player playerInstance;
+
+    // Singleton behavior
+    public static Player MyPlayer { get { return playerInstance; } }
+
     private static float LEFT_CAMERA_LIMIT = -35f;
     private static float RIGHT_CAMERA_LIMIT = 35f;
     private static float PARALLAX_FACTOR = 5f;
@@ -49,10 +53,18 @@ public class Player : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        /*
         if (playerInstance == null) {
             playerInstance = this;
         } else {
             Destroy(gameObject);
+        }
+        */
+        if (playerInstance != null && playerInstance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            playerInstance = this;
         }
         Debug.Log("Awake");
         SceneManager.activeSceneChanged += OnSceneLoad;
@@ -64,11 +76,11 @@ public class Player : MonoBehaviour
         {
             basAtkRet = this.gameObject.transform.Find("TargetReticle").GetComponent<TargetReticle>(); // Hardcoded name but shouldn't be an issue
         }
-        abilities.Add(new Test1(this));
-        abilities.Add(new Test2(this));
-        abilities.Add(new Test3(this));
-        abilities.Add(new Test4(this));
-        abilities.Add(new BasicAttack(this, basAtkRet)); // Treat basic attack like any other ability
+        abilities.Add(new Test1());
+        abilities.Add(new Test2());
+        abilities.Add(new Test3());
+        abilities.Add(new Test4());
+        abilities.Add(new BasicAttack(basAtkRet)); // Treat basic attack like any other ability
         foreach (BoxCollider2D bx in this.GetComponents<BoxCollider2D>())
         {
             if (bx.isTrigger)

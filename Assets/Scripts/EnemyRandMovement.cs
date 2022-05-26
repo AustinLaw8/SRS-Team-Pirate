@@ -14,7 +14,6 @@ public class EnemyRandMovement : MonoBehaviour
     [SerializeField] private float turnDist = 0.4f; // After moving turnDist, decide again to kite forward or back
     [SerializeField] private float speed = 0.8f; // Speed of travel
     [SerializeField] private float range = 4.0f; // Kite limit, manually adjust to be slightly less than actual range of missle used
-    private GameObject player;
     private float turnTimerDistTrav = 0.0f;
     private float jumpTimerDistTrav = 0.0f;
     Vector3 enemyToPlayer;
@@ -24,17 +23,16 @@ public class EnemyRandMovement : MonoBehaviour
     void Start()
     {
         //Only 1 player
-        player = GameObject.Find("Player");
         rb = this.GetComponent<Rigidbody2D>();
         sp = gameObject.GetComponent<SpriteRenderer>();
-        enemyToPlayer = transform.position - player.transform.position;
+        enemyToPlayer = transform.position - Player.MyPlayer.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (turnTimerDistTrav > turnDist) {
-            enemyToPlayer = transform.position - player.transform.position; 
+            enemyToPlayer = transform.position - Player.MyPlayer.transform.position; 
             turnTimerDistTrav = 0.0f;
         }
         if (jumpTimerDistTrav > jumpActivateDist) {
@@ -67,6 +65,6 @@ public class EnemyRandMovement : MonoBehaviour
         }
         turnTimerDistTrav += step;
         jumpTimerDistTrav += step;
-        sp.flipX = (gameObject.transform.position.x < player.transform.position.x);
+        sp.flipX = (gameObject.transform.position.x < Player.MyPlayer.transform.position.x);
     }
 }

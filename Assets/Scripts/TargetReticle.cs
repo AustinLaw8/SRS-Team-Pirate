@@ -21,10 +21,6 @@ public class TargetReticle : MonoBehaviour
         return enemyToHit;
     }
 
-    // Use to get player transform
-    // Use inspector to add player
-    [SerializeField] private GameObject player;
-
     void Awake()
     {
         // Use inspector to add player? 
@@ -42,11 +38,11 @@ public class TargetReticle : MonoBehaviour
             // Debug.Log("Aimed at enemy");
 
             // Player and enemyTarget.attachedRigidbody need to be 2D, which SHOULD happen
-            Vector2 playerToEnemy = enemyTarget.attachedRigidbody.transform.position - player.transform.position;
+            Vector2 playerToEnemy = enemyTarget.attachedRigidbody.transform.position - Player.MyPlayer.transform.position;
             // Use enemy mask, maybe can control range of attack with Raycast(pos1,pos2,RANGE,mask) ?
             LayerMask enemyMask = LayerMask.GetMask("Enemy");
             //int enemyMask = 1 << 9;
-            RaycastHit2D hit = Physics2D.Raycast(player.transform.position, playerToEnemy, 100, enemyMask);
+            RaycastHit2D hit = Physics2D.Raycast(Player.MyPlayer.transform.position, playerToEnemy, 100, enemyMask);
 
             //If something was hit
             if (hit.collider != null)
