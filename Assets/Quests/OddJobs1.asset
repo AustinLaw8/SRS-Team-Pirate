@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskDescription: Find someone to guide you to Miss Salcrest.
   reqAmount: 1
-  curAmount: 0
+  curAmount: 2
   npcName: Gustav
 --- !u!114 &11400000
 MonoBehaviour:
@@ -31,8 +31,7 @@ MonoBehaviour:
   information:
     name: Odd Jobs Part 1
     description: Now that you are fresh off the boat, you should try searching for
-      a new job. Maybe that Miss Salcrest could help you?
+      a new job. Maybe try Miss Salcrest...?
     icon: {fileID: 0}
-  initialized: 0
   tasks:
   - {fileID: -7444196346459169197}

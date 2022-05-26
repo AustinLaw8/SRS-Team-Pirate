@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalScenes/TownZone.unity
     guid: 2156fd59c3d6446128b9451144032b1f
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/MainMenu.unity
+    guid: 914f1530fbff543fca5ba50ca458f228
   m_configObjects: {}
