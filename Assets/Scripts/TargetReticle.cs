@@ -34,7 +34,7 @@ public class TargetReticle : MonoBehaviour
     // Trigger enemy vulnerable to being basic attacked
     private void OnTriggerStay2D(Collider2D enemyTarget) 
     {
-        if (enemyTarget.gameObject.tag == "Enemy") {
+        if (enemyTarget.gameObject.tag == "Enemy" || enemyTarget.gameObject.tag == "Projectile") {
             // Debug.Log("Aimed at enemy");
 
             // Player and enemyTarget.attachedRigidbody need to be 2D, which SHOULD happen

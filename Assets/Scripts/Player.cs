@@ -237,4 +237,16 @@ public class Player : MonoBehaviour
     public void returnControl() { controllable = true; }
     public bool isControllable() { return controllable; }
     public Quest getCurrentQuest() { return currentQuest; }
+
+    // MOVED FROM PROJECTILES TO ACCOUNT FOR DontDestroyOnLoad
+    void OnTriggerEnter2D(Collider2D p) 
+    {
+        //Debug.Log("on player");
+        if (p.gameObject.tag == "Projectile") {
+            this.GetComponent<Damageable>().applyDamage(1);
+            Destroy(p.gameObject);
+        }
+    }
+
+
 }

@@ -44,7 +44,8 @@ public class EnemyMeleeProjectile : MonoBehaviour
 
     // Upon contact, deal damage and explode
     // Set player collider to be a trigger?
-    private void OnTriggerStay2D(Collider2D playerTarget) 
+    /*
+    void OnTriggerStay2D(Collider2D playerTarget) 
     {
         //Debug.Log("on player");
         if (playerTarget.gameObject.tag == "Player") {
@@ -55,6 +56,7 @@ public class EnemyMeleeProjectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    */
 
     // Update is called once per frame
     void Update()
