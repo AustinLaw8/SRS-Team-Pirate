@@ -160,6 +160,8 @@ public class Player : MonoBehaviour
                     rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                 }
             }
+        } else {
+            
         }
     }
 
@@ -177,6 +179,7 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
+
         rb.velocity = new Vector2(x_vel, rb.velocity.y);
         foreach (var ability in abilities)
         {
