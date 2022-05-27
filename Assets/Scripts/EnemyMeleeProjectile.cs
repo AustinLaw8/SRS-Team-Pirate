@@ -15,7 +15,7 @@ public class EnemyMeleeProjectile : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     //[SerializeField] private float initVertForce = 0.0f;
     private SpriteRenderer sp;
-    private float dir = -1.0f;
+    //private float dir = -1.0f;
 
     private float distTrav = 0.0f;
 
