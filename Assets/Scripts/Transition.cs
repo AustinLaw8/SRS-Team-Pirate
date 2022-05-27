@@ -26,6 +26,7 @@ public class Transition : MonoBehaviour
             // Debug.Log("Switching to scene: " + transitionTo);
             SceneManager.LoadScene(transitionTo);
             Player.MyPlayer.transform.position = destination;
+            Player.MyPlayer.OnSceneLoad(SceneManager.GetActiveScene(), SceneManager.GetSceneByName(transitionTo));
             // SceneManager.SetActiveScene(SceneManager.GetSceneByName(transitionTo));
         }
     }

@@ -7,7 +7,7 @@ using Yarn.Unity;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(Damageable))]
+//[RequireComponent(typeof(Damageable))]
 
 public class Player : MonoBehaviour
 {
@@ -34,9 +34,12 @@ public class Player : MonoBehaviour
     private Vector2 facing;
     private bool controllable;
     private int maxHealth = 30;
+    [SerializeField] private int currHealth = 30;
     private float regenWait = 5.0f;
     private float timeUntilRegen = 5.0f;
     private int regenAmount = 1;
+    private float jumpWait = 2.0f;
+    private float timeUntilJump = 0.0f;
 
     // For dealing with world interaction
     [SerializeField] private LayerMask interactableMask;
@@ -157,9 +160,10 @@ public class Player : MonoBehaviour
             float yInput = input.Get<Vector2>().y;
             if (yInput > 0)
             {
-                if (groundedBox.IsTouchingLayers(groundMask.value))
+                if (groundedBox.IsTouchingLayers(groundMask.value) && timeUntilJump == 0)
                 {
                     rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                    timeUntilJump += jumpWait;
                 }
             }
         } else {
@@ -182,6 +186,14 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (currHealth <= 0) {
+            SceneManager.LoadScene("MainMenu");
+            currHealth = 30;
+            Destroy(GameObject.Find("PauseCanvas"));
+            Destroy(GameObject.Find("QuestCanvas"));
+            Destroy(this.gameObject);
+            return;
+        }
 
         if (!paused) {
             rb.velocity = new Vector2(x_vel, rb.velocity.y);
@@ -197,6 +209,7 @@ public class Player : MonoBehaviour
             timeUntilRegen -= Time.deltaTime;
             if (timeUntilRegen < 0) {
                 timeUntilRegen = regenWait;
+                /*
                 Damageable myDmg = this.GetComponent<Damageable>();
                 if (myDmg.getHealthLeft() < maxHealth) {
                     myDmg.applyDamage(-1*regenAmount);
@@ -204,11 +217,21 @@ public class Player : MonoBehaviour
                         myDmg.setHealthLeft(maxHealth);
                     }
                 }
+                */
+                currHealth += regenAmount;
+                if (currHealth > maxHealth) {
+                    currHealth = maxHealth;
+                }
+            }
+
+            timeUntilJump -= Time.deltaTime;
+            if (timeUntilJump < 0) {
+                timeUntilJump = 0;
             }
 
             sp.flipX = facing == Vector2.right;
-            if (dialogueRunner.IsDialogueRunning) { rb.velocity = Vector3.zero; }
-            setCamera();
+            if (dialogueRunner != null && dialogueRunner.IsDialogueRunning) { rb.velocity = Vector3.zero; }
+            if (mainCamera != null) { setCamera(); }
         } else {
             // Time.timeScale = 0 here so won't ever enter "else" section
         }
@@ -272,9 +295,14 @@ public class Player : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         backgroundParent = GameObject.Find("WorldBackground").transform;
         dialogueSystem = GameObject.Find("Dialogue System");
-        dialogueRunner = dialogueSystem.GetComponent<DialogueRunner>();
+        if (dialogueSystem != null) {
+            dialogueRunner = dialogueSystem.GetComponent<DialogueRunner>();
+        } else {
+            dialogueRunner = null;
+        }
         questCanvas = GameObject.Find("QuestCanvas");
-        this.GetComponent<Damageable>().setHealthLeft(maxHealth);
+        //this.GetComponent<Damageable>().setHealthLeft(maxHealth);
+        currHealth = maxHealth;
         // playNextDialogue(next.name);
     }
 
@@ -304,7 +332,8 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D p) 
     {
         if (p.gameObject.tag == "Projectile") {
-            this.GetComponent<Damageable>().applyDamage(1);
+            //this.GetComponent<Damageable>().applyDamage(1);
+            currHealth -= 1;
             Destroy(p.gameObject);
         }
     }
