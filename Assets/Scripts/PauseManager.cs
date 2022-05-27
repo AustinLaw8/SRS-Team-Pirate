@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class PauseManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
+        Time.timeScale = 1;
+
         if (pauseCanvasInstance != null && pauseCanvasInstance != this)
         {
             Destroy(this.transform.parent.gameObject);
@@ -24,14 +28,17 @@ public class PauseManager : MonoBehaviour
         pb = GameObject.Find("PauseButton");
         pb.GetComponent<Button>().onClick.AddListener(delegate
         {
-            /*
+
+            Debug.Log(SceneManager.GetActiveScene());
+
             // Switch player control on/off?
             if (Player.MyPlayer.isControllable()) {
                 Player.MyPlayer.revokeControl();
             } else {
                 Player.MyPlayer.returnControl();
             }
-            */
+            Player.MyPlayer.paused = !(Player.MyPlayer.paused);
+
 
             // Pause scene entirely?
             if (Time.timeScale == 1) {
