@@ -30,7 +30,7 @@ public class QuestManager : MonoBehaviour
 
         questObj.GetComponent<Button>().onClick.AddListener(delegate
         {
-            if(Player.MyPlayer.isControllable())
+            if(Player.MyPlayer.isControllable() && !Player.MyPlayer.paused)
             {
                 questWindow.SetActive(!questWindow.activeSelf);
                 if (questWindow.activeSelf)

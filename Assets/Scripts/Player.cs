@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
     private QuestManager questManager;
 
     public int stage = -1;
+    public bool paused;
 
     void Awake()
     {
@@ -110,6 +111,7 @@ public class Player : MonoBehaviour
         x_vel = 0;
 
         controllable = true;
+        paused = false;
         sp = GetComponent<SpriteRenderer>();
         currentQuest = quests[0];
     }
@@ -137,7 +139,7 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputValue input)
     {
-        if (controllable)
+        if (controllable && !paused)
         {
             x_vel = input.Get<Vector2>().x * speed;
 
@@ -160,6 +162,9 @@ public class Player : MonoBehaviour
                     rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                 }
             }
+        } else {
+            x_vel = 0;
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
 
@@ -177,31 +182,36 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
-        rb.velocity = new Vector2(x_vel, rb.velocity.y);
-        foreach (var ability in abilities)
-        {
-            ability.currentCooldown -= Time.deltaTime;
-            if (ability.currentCooldown < 0)
-            {
-                ability.currentCooldown = 0;
-            }
-        }
 
-        timeUntilRegen -= Time.deltaTime;
-        if (timeUntilRegen < 0) {
-            timeUntilRegen = regenWait;
-            Damageable myDmg = this.GetComponent<Damageable>();
-            if (myDmg.getHealthLeft() < maxHealth) {
-                myDmg.applyDamage(-1*regenAmount);
-                if (myDmg.getHealthLeft() > maxHealth) {
-                    myDmg.setHealthLeft(maxHealth);
+        if (!paused) {
+            rb.velocity = new Vector2(x_vel, rb.velocity.y);
+            foreach (var ability in abilities)
+            {
+                ability.currentCooldown -= Time.deltaTime;
+                if (ability.currentCooldown < 0)
+                {
+                    ability.currentCooldown = 0;
                 }
             }
-        }
 
-        sp.flipX = facing == Vector2.right;
-        if (dialogueRunner.IsDialogueRunning) { rb.velocity = Vector3.zero; }
-        setCamera();
+            timeUntilRegen -= Time.deltaTime;
+            if (timeUntilRegen < 0) {
+                timeUntilRegen = regenWait;
+                Damageable myDmg = this.GetComponent<Damageable>();
+                if (myDmg.getHealthLeft() < maxHealth) {
+                    myDmg.applyDamage(-1*regenAmount);
+                    if (myDmg.getHealthLeft() > maxHealth) {
+                        myDmg.setHealthLeft(maxHealth);
+                    }
+                }
+            }
+
+            sp.flipX = facing == Vector2.right;
+            if (dialogueRunner.IsDialogueRunning) { rb.velocity = Vector3.zero; }
+            setCamera();
+        } else {
+            // Time.timeScale = 0 here so won't ever enter "else" section
+        }
     }
 
     public void OnUseAbility1(InputValue input) { abilities[0].action(); }
@@ -285,7 +295,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void revokeControl() { controllable = false; rb.velocity = Vector3.zero; }
+    public void revokeControl() { controllable = false; /*rb.velocity = Vector3.zero;*/ }
     public void returnControl() { controllable = true; }
     public bool isControllable() { return controllable; }
     public Quest getCurrentQuest() { return currentQuest; }
